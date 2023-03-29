@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "193110102076",
+    "project_id": "mang9rme",
+    "storage_bucket": "mang9rme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193110102076:android:a3c672c67acd68ba88f339",
+        "android_client_info": {
+          "package_name": "com.goormthon.mang9rme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193110102076-ahmqj85rp1ebb3mqsrhrcn319k3bu2jr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goormthon.mang9rme",
+            "certificate_hash": "8f302ce30ab5c1110fe0a6b0268a298060426ed6"
+          }
+        },
+        {
+          "client_id": "193110102076-vtt82n30kr0pjjppo1m8tptapgl76srh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOmLFEVyu7BwUo4w3d4_6PP8MsykIs3cI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193110102076-vtt82n30kr0pjjppo1m8tptapgl76srh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

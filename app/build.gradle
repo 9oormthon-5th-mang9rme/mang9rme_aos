@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.goormthon.mang9rme'
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.mang9rme"
+        applicationId "com.goormthon.mang9rme"
         minSdk 24
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0.0"
 
