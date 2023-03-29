@@ -1,4 +1,4 @@
-package com.example.mang9rme
+package com.goormthon.mang9rme
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

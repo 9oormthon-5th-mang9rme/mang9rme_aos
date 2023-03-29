@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.mang9rme'
+    namespace 'com.goormthon.mang9rme'
     compileSdk 31
 
     defaultConfig {

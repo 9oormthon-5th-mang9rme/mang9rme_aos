@@ -1,4 +1,4 @@
-package com.example.mang9rme
+package com.goormthon.mang9rme
 
 import org.junit.Test
 
