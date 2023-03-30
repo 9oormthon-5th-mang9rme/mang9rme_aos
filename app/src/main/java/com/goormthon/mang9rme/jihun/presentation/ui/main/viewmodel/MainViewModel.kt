@@ -1,15 +1,11 @@
 package com.goormthon.mang9rme.jihun.presentation.ui.main.viewmodel
 
-import android.location.Location
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide.init
 import com.goormthon.mang9rme.common.data.StoneData
 import com.goormthon.mang9rme.jihun.data.repo.StoneRepository
-import com.goormthon.mang9rme.jihun.data.repo.StoneRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +25,7 @@ class MainViewModel @Inject constructor(private val stoneRepo: StoneRepository) 
     fun getStoneFeedData() {
         viewModelScope.launch {
             kotlin.runCatching {
-                stoneRepo.getStoneData()
+                stoneRepo.getStoneFeedData()
                     .onSuccess {
                         _stoneFeedData.value = it as MutableList
                     }

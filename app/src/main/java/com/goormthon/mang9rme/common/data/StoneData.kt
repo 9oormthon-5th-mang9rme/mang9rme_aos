@@ -14,7 +14,7 @@ package com.goormthon.mang9rme.common.data
  * @param rarity        돌 희귀도
  * @param attack        공격력
  * @param defense       방어력
- * @param magicDefence  마법저항력
+ * @param magicDefense  마법저항력
  */
 data class StoneData(
     val stoneId : Int,
@@ -29,7 +29,7 @@ data class StoneData(
     val rarity: String,
     val attack: Int,
     val defense: Int,
-    val magicDefence: Int
+    val magicDefense: Int
 ) : java.io.Serializable {
 
     override fun toString(): String {

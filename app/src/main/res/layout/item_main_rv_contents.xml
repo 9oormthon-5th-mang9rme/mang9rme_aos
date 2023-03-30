@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/back_main_content_rv"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="50dp">
 
         <ImageView
             android:id="@+id/item_main_rv_contents_iv_image"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{stoneData.dateTime}"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:textColor="@color/c_989696"
             android:fontFamily="@font/pretendard_medium"
             android:includeFontPadding="false"
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{stoneData.address}"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:textColor="@color/c_989696"
             android:layout_marginStart="6dp"
             android:fontFamily="@font/pretendard_medium"
