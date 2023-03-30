@@ -1,4 +1,4 @@
-package com.goormthon.mang9rme.common.util
+package com.goormthon.mang9rme.kimbsu.common.util
 
 import android.content.Context
 import android.util.TypedValue

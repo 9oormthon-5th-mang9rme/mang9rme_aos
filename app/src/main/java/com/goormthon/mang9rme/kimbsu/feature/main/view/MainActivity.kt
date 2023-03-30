@@ -1,4 +1,4 @@
-package com.goormthon.mang9rme.feature.main.view
+package com.goormthon.mang9rme.kimbsu.feature.main.view
 
 import android.os.Bundle
 import android.widget.Toast
@@ -6,9 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.ActivityMainBinding
-import com.goormthon.mang9rme.feature.base.view.BaseActivity
-import com.goormthon.mang9rme.feature.base.viewmodel.BaseViewModel
-import com.goormthon.mang9rme.feature.main.viewmodel.MainViewModel
+import com.goormthon.mang9rme.kimbsu.feature.base.view.BaseActivity
+import com.goormthon.mang9rme.kimbsu.feature.base.viewmodel.BaseViewModel
+import com.goormthon.mang9rme.kimbsu.feature.main.viewmodel.MainViewModel
 
 class MainActivity : BaseActivity() {
 

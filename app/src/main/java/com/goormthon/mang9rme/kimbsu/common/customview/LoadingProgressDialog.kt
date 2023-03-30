@@ -1,4 +1,4 @@
-package com.goormthon.mang9rme.common.customview
+package com.goormthon.mang9rme.kimbsu.common.customview
 
 import android.app.Dialog
 import android.content.Context

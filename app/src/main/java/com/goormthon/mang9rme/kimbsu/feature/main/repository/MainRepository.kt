@@ -1,7 +1,7 @@
-package com.goormthon.mang9rme.feature.main.repository
+package com.goormthon.mang9rme.kimbsu.feature.main.repository
 
 import android.app.Application
-import com.goormthon.mang9rme.feature.base.repository.BaseNetworkRepository
+import com.goormthon.mang9rme.kimbsu.feature.base.repository.BaseNetworkRepository
 
 class MainRepository(
     private val application: Application

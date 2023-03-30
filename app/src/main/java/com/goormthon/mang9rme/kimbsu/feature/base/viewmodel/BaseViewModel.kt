@@ -1,12 +1,12 @@
-package com.goormthon.mang9rme.feature.base.viewmodel
+package com.goormthon.mang9rme.kimbsu.feature.base.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.goormthon.mang9rme.feature.main.repository.MainRepository
-import com.goormthon.mang9rme.feature.main.viewmodel.MainViewModel
+import com.goormthon.mang9rme.kimbsu.feature.main.repository.MainRepository
+import com.goormthon.mang9rme.kimbsu.feature.main.viewmodel.MainViewModel
 
 open class BaseViewModel : ViewModel() {
 

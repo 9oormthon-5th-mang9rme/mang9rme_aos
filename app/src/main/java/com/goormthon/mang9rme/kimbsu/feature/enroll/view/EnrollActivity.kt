@@ -1,12 +1,12 @@
-package com.goormthon.mang9rme.feature.enroll.view
+package com.goormthon.mang9rme.kimbsu.feature.enroll.view
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import com.goormthon.mang9rme.common.util.DLog
+import com.goormthon.mang9rme.kimbsu.common.util.DLog
 import com.goormthon.mang9rme.databinding.ActivityEnrollBinding
-import com.goormthon.mang9rme.feature.base.view.BaseActivity
+import com.goormthon.mang9rme.kimbsu.feature.base.view.BaseActivity
 
 class EnrollActivity : BaseActivity() {
 

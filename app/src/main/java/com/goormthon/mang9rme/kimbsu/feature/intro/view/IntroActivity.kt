@@ -1,13 +1,13 @@
-package com.goormthon.mang9rme.feature.intro.view
+package com.goormthon.mang9rme.kimbsu.feature.intro.view
 
 import android.content.Intent
 import android.os.Bundle
 import com.goormthon.mang9rme.R
-import com.goormthon.mang9rme.common.customview.MessageDialog
-import com.goormthon.mang9rme.common.util.NetworkUtil
+import com.goormthon.mang9rme.kimbsu.common.customview.MessageDialog
+import com.goormthon.mang9rme.kimbsu.common.util.NetworkUtil
 import com.goormthon.mang9rme.databinding.ActivityIntroBinding
-import com.goormthon.mang9rme.feature.base.view.BaseActivity
-import com.goormthon.mang9rme.feature.main.view.MainActivity
+import com.goormthon.mang9rme.kimbsu.feature.base.view.BaseActivity
+import com.goormthon.mang9rme.kimbsu.feature.main.view.MainActivity
 
 class IntroActivity : BaseActivity() {
 

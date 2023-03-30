@@ -1,7 +1,7 @@
-package com.goormthon.mang9rme.feature.base.repository
+package com.goormthon.mang9rme.kimbsu.feature.base.repository
 
 import android.app.Application
-import com.goormthon.mang9rme.common.util.DLog
+import com.goormthon.mang9rme.kimbsu.common.util.DLog
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL

@@ -1,4 +1,4 @@
-package com.goormthon.mang9rme.common.customview
+package com.goormthon.mang9rme.kimbsu.common.customview
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.goormthon.mang9rme.R
-import com.goormthon.mang9rme.common.util.ConvertUtil
+import com.goormthon.mang9rme.kimbsu.common.util.ConvertUtil
 import com.goormthon.mang9rme.databinding.DialogMessageBinding
 
 class MessageDialog : DialogFragment {

@@ -1,9 +1,9 @@
-package com.goormthon.mang9rme.feature.base.view
+package com.goormthon.mang9rme.kimbsu.feature.base.view
 
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.goormthon.mang9rme.R
-import com.goormthon.mang9rme.common.customview.LoadingProgressDialog
+import com.goormthon.mang9rme.kimbsu.common.customview.LoadingProgressDialog
 
 open class BaseActivity : AppCompatActivity() {
 
