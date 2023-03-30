@@ -1,15 +1,35 @@
 package com.goormthon.mang9rme.kimbsu.feature.enroll.view
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import com.goormthon.mang9rme.kimbsu.common.util.DLog
+import android.provider.MediaStore
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.ActivityEnrollBinding
+import com.goormthon.mang9rme.kimbsu.common.util.DLog
+import com.goormthon.mang9rme.kimbsu.data.SelectPhotoStatus
 import com.goormthon.mang9rme.kimbsu.feature.base.view.BaseActivity
+import com.goormthon.mang9rme.kimbsu.feature.base.viewmodel.BaseViewModel
+import com.goormthon.mang9rme.kimbsu.feature.enroll.viewmodel.EnrollViewModel
+
 
 class EnrollActivity : BaseActivity() {
 
+    private val model: EnrollViewModel by lazy {
+        ViewModelProvider(
+            this,
+            BaseViewModel.Factory(application)
+        )[EnrollViewModel::class.java]
+    }
     private val binding: ActivityEnrollBinding by lazy {
         ActivityEnrollBinding.inflate(layoutInflater)
     }
@@ -23,11 +43,89 @@ class EnrollActivity : BaseActivity() {
     }
 
     private fun setObserver() {
+        model.progressFlag.observe(this, Observer { flag ->
+            if (flag) {
+                showProgress("")
+            } else {
+                dismissProgress()
+            }
+        })
 
+        model.exceptionData.observe(this, Observer { exception ->
+            exception.message?.let { msg ->
+                model.setProgressFlag(false)
+                showErrorMsg()
+                DLog.e(TAG, msg, exception)
+            }
+        })
+
+        model.apiFailMsg.observe(this, Observer { msg ->
+            model.setProgressFlag(false)
+            showToastMsg(msg)
+        })
+
+        model.selectPhotoStatus.observe(this, Observer { selectPhotoStatus ->
+            DLog.d("${TAG}_observe", "selectPhotoStatus=$selectPhotoStatus")
+            when (selectPhotoStatus) {
+                SelectPhotoStatus.NONE -> {
+
+                }
+                SelectPhotoStatus.CAMERA -> {
+                    val cameraPermission = checkCameraPermission()
+                    val storagePermission = checkStoragePermission()
+                    val mediaLocationPermission = checkMediaLocationPermission()
+                    DLog.d(
+                        "${TAG}_observe",
+                        "cameraPermission=$cameraPermission, storagePermission=$storagePermission, mediaLocationPermission=$mediaLocationPermission"
+                    )
+                    if (cameraPermission && storagePermission && mediaLocationPermission) {
+                        dispatchCameraIntent()
+                    }
+                }
+                SelectPhotoStatus.GALLERY -> {
+                    val storagePermission = checkStoragePermission()
+                    val mediaLocationPermission = checkMediaLocationPermission()
+                    DLog.d(
+                        "${TAG}_observe",
+                        "storagePermission=$storagePermission, mediaLocationPermission=$mediaLocationPermission"
+                    )
+                    if (storagePermission && mediaLocationPermission) {
+                        dispatchGalleryIntent()
+                    }
+                }
+                SelectPhotoStatus.SUCCESS -> {
+                    model.uploadImageData.value?.let { uploadImageData ->
+                        setFragment(EnrollStepBFragment())
+                    }
+                }
+                else -> {
+
+                }
+            }
+        })
     }
 
     private fun init() {
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            setFragment(EnrollStepAFragment())
+        }
+    }
 
+    private fun setFragment(fragment: Fragment) {
+        when (fragment) {
+            is EnrollStepAFragment -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.addToBackStack(null)
+                    .add(R.id.fl_enroll, fragment, EnrollStepAFragment.TAG)
+                    .commitAllowingStateLoss()
+            }
+            is EnrollStepBFragment -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.addToBackStack(null)
+                    .add(R.id.fl_enroll, fragment, EnrollStepBFragment.TAG)
+                    .commitAllowingStateLoss()
+            }
+        }
     }
 
     // region 권한 요청 관리
@@ -39,20 +137,17 @@ class EnrollActivity : BaseActivity() {
      * @return 카메라 권한이 있다면 true, 없다면 false
      */
     private fun checkCameraPermission(): Boolean {
-        // Android 6.0 Marshmallow 부터는 카메라 권한이 있어야 함
         val permissionResult = checkSelfPermission(Manifest.permission.CAMERA)
 
-        if (permissionResult == PackageManager.PERMISSION_GRANTED) {
-            return true
+        return if (permissionResult == PackageManager.PERMISSION_GRANTED) {
+            true
         } else {
             requestPermissions(
                 arrayOf(Manifest.permission.CAMERA),
                 PERMISSION_CAMERA
             )
-            return false
+            false
         }
-
-        return true
     }
 
     /**
@@ -63,28 +158,40 @@ class EnrollActivity : BaseActivity() {
      * @return 저장공간 권한이 있다면 true, 없다면 false
      */
     private fun checkStoragePermission(): Boolean {
-        // Android 6.0 Marshmallow 부터는 저장공간 권한이 있어야 함
-        val permissionReadResult =
-            checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-        val permissionWriteResult =
-            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permissionReadResult =
+                checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES)
 
-        if (permissionReadResult == PackageManager.PERMISSION_GRANTED
-            && permissionWriteResult == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
+            return if (permissionReadResult == PackageManager.PERMISSION_GRANTED) {
+                true
+            } else {
+                requestPermissions(
+                    arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                    PERMISSION_READ_MEDIA
+                )
+                false
+            }
         } else {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                PERMISSION_STORAGE
-            )
-            return false
-        }
+            val permissionReadResult =
+                checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            val permissionWriteResult =
+                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-        return true
+            return if (permissionReadResult == PackageManager.PERMISSION_GRANTED
+                && permissionWriteResult == PackageManager.PERMISSION_GRANTED
+            ) {
+                true
+            } else {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ),
+                    PERMISSION_STORAGE
+                )
+                false
+            }
+        }
     }
 
     /**
@@ -124,21 +231,151 @@ class EnrollActivity : BaseActivity() {
         when (requestCode) {
             PERMISSION_CAMERA -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    when (model.selectPhotoStatus.value) {
+                        SelectPhotoStatus.CAMERA -> {
+                            if (checkStoragePermission()) {
+                                dispatchCameraIntent()
+                            }
+                        }
+                        else -> {
+                            DLog.e(
+                                "${TAG}_onRequestPermissionResult",
+                                "Inappropriate SelectPhotoStatus! ${model.selectPhotoStatus.value}"
+                            )
+                        }
+                    }
                 }
             }
             PERMISSION_STORAGE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED
                 ) {
+                    when (model.selectPhotoStatus.value) {
+                        SelectPhotoStatus.CAMERA -> {
+                            if (checkCameraPermission()) {
+                                dispatchCameraIntent()
+                            }
+                        }
+                        SelectPhotoStatus.GALLERY -> {
+                            dispatchGalleryIntent()
+                        }
+                        else -> {
+                            DLog.e(
+                                "${TAG}_onRequestPermissionResult",
+                                "Inappropriate SelectPhotoStatus! ${model.selectPhotoStatus.value}"
+                            )
+                        }
+                    }
                 }
             }
             PERMISSION_MEDIA_LOCATION -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 }
             }
+            PERMISSION_READ_MEDIA -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    when (model.selectPhotoStatus.value) {
+                        SelectPhotoStatus.CAMERA -> {
+                            if (checkCameraPermission()) {
+                                dispatchCameraIntent()
+                            }
+                        }
+                        SelectPhotoStatus.GALLERY -> {
+
+                        }
+                        else -> {
+                            DLog.e(
+                                "${TAG}_onRequestPermissionResult",
+                                "Inappropriate SelectPhotoStatus! ${model.selectPhotoStatus.value}"
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
     // endregion 권한 요청 관리
+
+    // region 사진 가져오는 함수
+    private fun dispatchCameraIntent() {
+        DLog.d("${TAG}_dispatchCameraIntent", "dispatchCameraIntent is called")
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        val tempFileForCamera = model.requestTempFileForCamera()
+        if (tempFileForCamera != null) {
+            val photoUri = FileProvider.getUriForFile(
+                this,
+                "com.goormthon.mang9rme.provider",
+                tempFileForCamera
+            )
+
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+
+            DLog.d("${TAG}_dispatchCameraIntent", "photoUri=$photoUri")
+        } else {
+            model.setSelectPhotoStatus(SelectPhotoStatus.NONE)
+        }
+
+        cameraIntentForResult.launch(cameraIntent)
+    }
+
+    private fun dispatchGalleryIntent() {
+        val galleryIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+        }
+        galleryIntentForResult.launch(galleryIntent)
+    }
+    // endregion 사진 가져오는 함수
+
+
+    /**
+     * 카메라 앱에서 촬영한 데이터를 처리함
+     */
+    private val cameraIntentForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    model.setProgressFlag(true)
+                    model.tempFileForCamera.value?.let { tempFileForCamera ->
+                        MediaScannerConnection.scanFile(
+                            applicationContext,
+                            arrayOf(tempFileForCamera.absolutePath),
+                            arrayOf("image/*"),
+                            null
+                        )
+                    }
+                    model.requestImagePostProcessFromCamera()
+                }
+                else -> {
+                    model.requestImagePostProcessFromCamera()
+                    model.setSelectPhotoStatus(SelectPhotoStatus.NONE)
+                }
+            }
+        }
+
+    private val galleryIntentForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    model.setProgressFlag(true)
+                    val data = result.data
+                    val selectedImageUri: Uri? = data?.data
+                    DLog.d(
+                        "${TAG}_galleryIntentForResult",
+                        "selectedImageUri=$selectedImageUri"
+                    )
+                    if (selectedImageUri != null) {
+                        model.requestImagePostProcessFromGallery(selectedImageUri)
+                    } else {
+                        model.setSelectPhotoStatus(SelectPhotoStatus.NONE)
+                    }
+                }
+                else -> {
+                    model.requestImagePostProcessFromCamera()
+                    model.setSelectPhotoStatus(SelectPhotoStatus.NONE)
+                }
+            }
+        }
 
     companion object {
         private const val TAG: String = "EnrollActivity"
@@ -146,6 +383,7 @@ class EnrollActivity : BaseActivity() {
         private const val PERMISSION_CAMERA: Int = 100
         private const val PERMISSION_STORAGE: Int = 101
         private const val PERMISSION_MEDIA_LOCATION: Int = 102
+        private const val PERMISSION_READ_MEDIA: Int = 103
     }
 
 }

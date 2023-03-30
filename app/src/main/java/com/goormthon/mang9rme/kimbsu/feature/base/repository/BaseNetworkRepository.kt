@@ -21,7 +21,8 @@ open class BaseNetworkRepository(
     protected fun sendRequest(
         strUrl: String,
         hsParams: HashMap<String, String>,
-        urlState: String
+        urlState: String,
+        isKakaoAPI: Boolean = false
     ): String {
         val connection: HttpURLConnection
         var message: String = ""
@@ -29,6 +30,8 @@ open class BaseNetworkRepository(
             val url: URL =
                 if (urlState == "GET") URL("${strUrl}?${getParams(hsParams)}") else URL(strUrl)
 
+            DLog.d(TAG, "strUrl=$strUrl")
+            DLog.d(TAG, "hsParams=$hsParams")
             // Https Protocol Check
             connection = if (url.protocol == "https") {
                 trustAllHosts()
@@ -44,6 +47,13 @@ open class BaseNetworkRepository(
                 connectTimeout = TIME_OUT
                 requestMethod = urlState
                 setRequestProperty("Accept", "application/json")
+
+                if (isKakaoAPI) {
+                    connection.setRequestProperty(
+                        "Authorization",
+                        "KakaoAK 033ebeba4caf1c6f3dbe0e0793175a1b"
+                    )
+                }
             }
 
             when (urlState) {
@@ -80,7 +90,6 @@ open class BaseNetworkRepository(
     }
 
     private fun getMessage(inputStream: InputStream?): String {
-        DLog.d("${TAG}_getMessage", "inputStream=$inputStream")
         val builder = java.lang.StringBuilder()
         var reader: BufferedReader? = null
         try {

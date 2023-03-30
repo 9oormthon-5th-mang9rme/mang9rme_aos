@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/iv_loadingProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:src="@drawable/icon_loading_progress"
         app:layout_constraintBottom_toTopOf="@id/tv_loadingProgress"
         app:layout_constraintLeft_toLeftOf="parent"

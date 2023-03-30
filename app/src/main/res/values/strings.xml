@@ -6,14 +6,28 @@
 
     <string name="toast_msg_back_pressed">뒤로 가기를 한 번 더 누르면 종료됩니다.</string>
 
+    <!--    region EnrollStepAFragment-->
+    <string name="enroll_step_a_add_photo">돌 사진을\n추가해주세요</string>
+    <!--    endregion EnrollStepAFragment-->
+
+    <!--    region EnrollStepCFragment-->
+    <string name="enroll_step_c_question_001">구멍의 개수는 어떤가요?</string>
+    <string name="enroll_step_c_question_001_answer_001">없어요</string>
+    <string name="enroll_step_c_question_001_answer_002">적어요</string>
+    <string name="enroll_step_c_question_001_answer_003">많아요</string>
+    <string name="enroll_step_c_question_002">점의 개수는 어떤가요?</string>
+    <string name="enroll_step_c_question_002_answer_001">없어요</string>
+    <string name="enroll_step_c_question_002_answer_002">적어요</string>
+    <string name="enroll_step_c_question_002_answer_003">많아요</string>
+    <string name="enroll_step_c_question_003">색상은 어떤가요?</string>
+    <string name="enroll_step_c_question_003_answer_001">검은색</string>
+    <string name="enroll_step_c_question_003_answer_002">적갈색</string>
+    <string name="enroll_step_c_question_003_answer_003">회색ㆍ백색</string>
+    <!--    endregion EnrollStepCFragment-->
+
     <string name="main_what_i_got">내가 수집한 돌</string>
 
     <string name="main_filter_sort_time">최신순</string>
     <string name="main_filter_sort_level">레벨순</string>
 
-    <string name="stone_card_attack">공격력</string>
-    <string name="stone_card_defence">방어력</string>
-    <string name="stone_card_magic_defence">마법저항력</string>
-
-    <string name="stone_region">돌의 고향</string>
 </resources>
