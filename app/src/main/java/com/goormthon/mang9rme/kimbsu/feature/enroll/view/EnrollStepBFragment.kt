@@ -75,7 +75,7 @@ class EnrollStepBFragment : Fragment(), View.OnClickListener {
             }
             // 다음으로 버튼
             R.id.tv_enroll_nextStep -> {
-
+                (activity as? EnrollActivity)?.setFragment(EnrollStepCFragment())
             }
         }
     }

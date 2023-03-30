@@ -111,7 +111,7 @@ class EnrollActivity : BaseActivity() {
         }
     }
 
-    private fun setFragment(fragment: Fragment) {
+    fun setFragment(fragment: Fragment) {
         when (fragment) {
             is EnrollStepAFragment -> {
                 val transaction = supportFragmentManager.beginTransaction()
@@ -121,10 +121,48 @@ class EnrollActivity : BaseActivity() {
             }
             is EnrollStepBFragment -> {
                 val transaction = supportFragmentManager.beginTransaction()
-                transaction.addToBackStack(null)
+                transaction.setCustomAnimations(
+                    R.anim.enter_from_right_200,
+                    0,
+                    0,
+                    0
+                ).addToBackStack(null)
                     .add(R.id.fl_enroll, fragment, EnrollStepBFragment.TAG)
                     .commitAllowingStateLoss()
             }
+            is EnrollStepCFragment -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.setCustomAnimations(
+                    R.anim.enter_from_right_200,
+                    0,
+                    0,
+                    0
+                ).addToBackStack(null)
+                    .add(R.id.fl_enroll, fragment, EnrollStepCFragment.TAG)
+                    .commitAllowingStateLoss()
+            }
+        }
+    }
+
+    fun popNaviStack() {
+        val topFragment = getTopFragment()
+
+        when (topFragment) {
+            is EnrollStepBFragment,
+            is EnrollStepCFragment -> {
+                supportFragmentManager.beginTransaction()
+                    .remove(topFragment)
+                    .commitAllowingStateLoss()
+                supportFragmentManager.popBackStackImmediate()
+            }
+        }
+    }
+
+    private fun getTopFragment(): Fragment? {
+        return if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.findFragmentById(R.id.fl_enroll)
+        } else {
+            null
         }
     }
 
@@ -326,6 +364,18 @@ class EnrollActivity : BaseActivity() {
         galleryIntentForResult.launch(galleryIntent)
     }
     // endregion 사진 가져오는 함수
+
+    override fun onBackPressed() {
+        when (val topFragment = getTopFragment()) {
+            is EnrollStepBFragment,
+            is EnrollStepCFragment -> {
+                popNaviStack()
+            }
+            else -> {
+                finish()
+            }
+        }
+    }
 
 
     /**

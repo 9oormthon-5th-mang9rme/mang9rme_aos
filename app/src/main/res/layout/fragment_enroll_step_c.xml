@@ -87,7 +87,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/back_enroll_answer"
+        app:layout_constraintBottom_toTopOf="@id/tv_enroll_question_dot"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_enroll_question_hole">
@@ -96,6 +96,7 @@
             android:id="@+id/tv_enroll_answer_hole_1"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_left_unselected"
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -104,16 +105,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/view_answer_hole_divider1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view_answer_hole_divider1"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="@color/gray_300"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_hole_1"
             app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_hole_2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,6 +112,7 @@
             android:id="@+id/tv_enroll_answer_hole_2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_mid_unselected"
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -128,17 +120,7 @@
             android:textColor="@color/gray_800"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/view_answer_hole_divider1"
-            app:layout_constraintRight_toLeftOf="@id/view_answer_hole_divider2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view_answer_hole_divider2"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="@color/gray_300"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_hole_2"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_hole_1"
             app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_hole_3"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,6 +128,7 @@
             android:id="@+id/tv_enroll_answer_hole_3"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_right_unselected"
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -153,7 +136,7 @@
             android:textColor="@color/gray_800"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/view_answer_hole_divider2"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_hole_2"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -171,19 +154,19 @@
         android:text="@string/enroll_step_c_question_002"
         android:textColor="@color/c_000000"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@id/cl_enroll_dot_hole"
+        app:layout_constraintBottom_toTopOf="@id/cl_enroll_answer_dot"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_enroll_answer_hole" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_enroll_dot_hole"
+        android:id="@+id/cl_enroll_answer_dot"
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/back_enroll_answer"
+        app:layout_constraintBottom_toTopOf="@id/tv_enroll_question_color"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_enroll_question_dot">
@@ -192,6 +175,7 @@
             android:id="@+id/tv_enroll_answer_dot_1"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_left_unselected"
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -200,16 +184,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/view_answer_dot_divider1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view_answer_dot_divider1"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="@color/gray_300"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_dot_1"
             app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_dot_2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -217,6 +191,7 @@
             android:id="@+id/tv_enroll_answer_dot_2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_mid_unselected"
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -224,17 +199,7 @@
             android:textColor="@color/gray_800"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/view_answer_dot_divider1"
-            app:layout_constraintRight_toLeftOf="@id/view_answer_dot_divider2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view_answer_dot_divider2"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="@color/gray_300"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_dot_2"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_dot_1"
             app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_dot_3"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -242,6 +207,7 @@
             android:id="@+id/tv_enroll_answer_dot_3"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_right_unselected"
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -249,10 +215,107 @@
             android:textColor="@color/gray_800"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/view_answer_dot_divider2"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_dot_2"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_enroll_question_color"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+        android:text="@string/enroll_step_c_question_003"
+        android:textColor="@color/c_000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/cl_enroll_answer_color"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_enroll_answer_dot" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_enroll_answer_color"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_enroll_nextStep"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_enroll_question_color">
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_color_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_left_unselected"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_003_answer_001"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_color_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_color_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_mid_unselected"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_003_answer_002"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_color_1"
+            app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_color_3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_color_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/back_enroll_answer_right_unselected"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_003_answer_003"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_color_2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_enroll_submit"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="36dp"
+        android:alpha="0.3"
+        android:background="@drawable/back_enroll_next_step"
+        android:gravity="center"
+        android:text="등록하기"
+        android:textColor="@color/c_ffffff"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,9 @@
 package com.goormthon.mang9rme.kimbsu.feature.enroll.viewmodel
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.goormthon.mang9rme.common.util.UploadStoneRepositoryImpl
 import com.goormthon.mang9rme.kimbsu.common.util.DLog
 import com.goormthon.mang9rme.kimbsu.data.SelectPhotoStatus
 import com.goormthon.mang9rme.kimbsu.data.network.NetworkResult
@@ -14,11 +12,9 @@ import com.goormthon.mang9rme.kimbsu.feature.enroll.data.UploadImageData
 import com.goormthon.mang9rme.kimbsu.feature.enroll.repository.EnrollImageRepository
 import com.goormthon.mang9rme.kimbsu.feature.enroll.repository.EnrollNetworkRepository
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import java.io.File
 
 class EnrollViewModel(
-    private val uploadStoneRepo : UploadStoneRepositoryImpl,
     private val networkRepository: EnrollNetworkRepository,
     private val imageRepository: EnrollImageRepository
 ) : BaseViewModel() {
@@ -35,6 +31,29 @@ class EnrollViewModel(
 
     private val _address: MutableLiveData<String> = MutableLiveData()
     val address: LiveData<String> get() = _address
+
+    /**
+     * 구멍 개수 질문
+     */
+    private val _holeQuestionAnswer: MutableLiveData<Int> = MutableLiveData(-1)
+    val holeQuestionAnswer: LiveData<Int> get() = _holeQuestionAnswer
+
+    /**
+     * 점 개수 질문
+     */
+    private val _dotQuestionAnswer: MutableLiveData<Int> = MutableLiveData(-1)
+    val dotQuestionAnswer: LiveData<Int> get() = _dotQuestionAnswer
+
+    /**
+     * 색상 질문
+     */
+    private val _colorQuestionAnswer: MutableLiveData<Int> = MutableLiveData(-1)
+    val colorQuestionAnswer: LiveData<Int> get() = _colorQuestionAnswer
+
+    /**
+     * 모든 질문을 체크했는지 여부
+     */
+    val allQuestionCheck: Boolean get() = holeQuestionAnswer.value != -1 && dotQuestionAnswer.value != -1 && colorQuestionAnswer.value != -1
 
     fun requestCoordToAddress(pLat: Float?, pLng: Float?) {
         viewModelScope.launch {
@@ -65,6 +84,14 @@ class EnrollViewModel(
                 }
             } else {
                 _address.value = "제주 어딘가"
+            }
+        }
+    }
+
+    fun requestStoneDataUpload() {
+        viewModelScope.launch {
+            uploadImageData.value?.let { uploadImageData ->
+                networkRepository.makeEnrollStoneRequest(uploadImageData)
             }
         }
     }
@@ -148,14 +175,16 @@ class EnrollViewModel(
         }
     }
 
-    fun postStoneData(image : MultipartBody.Part?, body : UploadImageData) {
-        if(image != null) {
-            viewModelScope.launch {
-                uploadStoneRepo.uploadImage(image, body)
-                    .onSuccess { Log.d(TAG, "postStoneData: SUCCESS") }
-                    .onFailure { Log.d(TAG, "postStoneData: FAIL") }
-            }
-        }
+    fun setHoleQuestionAnswer(pAnswer: Int) {
+        _holeQuestionAnswer.value = pAnswer
+    }
+
+    fun setDotQuestionAnswer(pAnswer: Int) {
+        _dotQuestionAnswer.value = pAnswer
+    }
+
+    fun setColorQuestionAnswer(pAnswer: Int) {
+        _colorQuestionAnswer.value = pAnswer
     }
 
     companion object {

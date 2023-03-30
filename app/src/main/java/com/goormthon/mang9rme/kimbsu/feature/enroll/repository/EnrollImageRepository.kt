@@ -25,7 +25,7 @@ class EnrollImageRepository(
         SimpleDateFormat("yyyy:MM:dd HH:mm:ss")
     }
     private val dateFormatter: SimpleDateFormat by lazy {
-        SimpleDateFormat("yyyy년 MM월 dd일")
+        SimpleDateFormat("MM월 dd일 E요일")
     }
 
     /**

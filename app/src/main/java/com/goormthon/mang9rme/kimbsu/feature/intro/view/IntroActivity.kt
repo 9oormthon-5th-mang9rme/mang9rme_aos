@@ -1,10 +1,14 @@
 package com.goormthon.mang9rme.kimbsu.feature.intro.view
 
+import android.animation.AnimatorSet
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.goormthon.mang9rme.R
+import com.goormthon.mang9rme.common.data.StoneData
 import com.goormthon.mang9rme.databinding.ActivityIntroBinding
 import com.goormthon.mang9rme.jihun.presentation.ui.main.view.MainActivity
 import com.goormthon.mang9rme.kimbsu.common.customview.MessageDialog
@@ -12,7 +16,6 @@ import com.goormthon.mang9rme.kimbsu.common.util.DLog
 import com.goormthon.mang9rme.kimbsu.common.util.NetworkUtil
 import com.goormthon.mang9rme.kimbsu.feature.base.view.BaseActivity
 import com.goormthon.mang9rme.kimbsu.feature.base.viewmodel.BaseViewModel
-import com.goormthon.mang9rme.kimbsu.feature.enroll.view.EnrollActivity
 import com.goormthon.mang9rme.kimbsu.feature.intro.viewmodel.IntroViewModel
 
 class IntroActivity : BaseActivity() {
@@ -37,11 +40,7 @@ class IntroActivity : BaseActivity() {
 
     private fun setObserver() {
         model.progressFlag.observe(this, Observer { flag ->
-//            if (flag) {
-//                showProgress("")
-//            } else {
-//                dismissProgress()
-//            }
+
         })
 
         model.exceptionData.observe(this, Observer { exception ->
@@ -49,11 +48,6 @@ class IntroActivity : BaseActivity() {
                 model.setProgressFlag(false)
                 showErrorMsg()
                 DLog.e(TAG, msg, exception)
-
-                // TODO: Debug 기능
-                val enrollIntent = Intent(this, EnrollActivity::class.java)
-                startActivity(enrollIntent)
-                finish()
             }
         })
 
@@ -63,15 +57,43 @@ class IntroActivity : BaseActivity() {
         })
 
         model.stoneDataList.observe(this, Observer { stoneDataList ->
-            model.setProgressFlag(false)
-            val mainIntent = Intent(this, MainActivity::class.java).apply {
-                putExtra("stone_data_list", stoneDataList)
+            val valueAnimator = ValueAnimator
+                .ofFloat(0f, 1f)
+                .setDuration(500)
+            valueAnimator.addUpdateListener { animation ->
+                val animatedValue = animation.animatedValue as Float
+                binding.tvIntroStart.alpha = animatedValue
             }
-            startActivity(mainIntent)
+            AnimatorSet().let { animatorSet ->
+                animatorSet.interpolator = AccelerateDecelerateInterpolator()
+                animatorSet.play(valueAnimator)
+                animatorSet.start()
+            }
+            
+            val jumpAnimator = ValueAnimator
+                .ofFloat(0f, -50f, 0f)
+                .setDuration(500)
+            jumpAnimator.addUpdateListener { animation ->
+                val animatedValue = animation.animatedValue as Float
+                binding.ivIntroStoneFriends.translationY = animatedValue
+            }
+            AnimatorSet().let { animatorSet ->
+                animatorSet.interpolator = AccelerateDecelerateInterpolator()
+                animatorSet.play(jumpAnimator)
+                animatorSet.start()
+            }
         })
     }
 
     private fun init() {
+        binding.tvIntroStart.setOnClickListener { view ->
+            val mainIntent = Intent(this, MainActivity::class.java).apply {
+                putExtra("stone_data_list", model.stoneDataList.value ?: arrayListOf<StoneData>())
+            }
+            startActivity(mainIntent)
+            finish()
+        }
+
         // network connected
         if (NetworkUtil.checkNetworkEnable(this)) {
             model.requestStoneDataList()

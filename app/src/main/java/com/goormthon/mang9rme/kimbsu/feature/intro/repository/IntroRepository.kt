@@ -18,11 +18,10 @@ class IntroRepository(
 
     suspend fun makeStoneDataListRequest(): NetworkResult<ArrayList<StoneData>> {
         return withContext(Dispatchers.IO) {
-            val strUrl = ""
+            val strUrl = "${BASE_URL}/api/stone"
             val hsParams = HashMap<String, String>().apply {
-
             }
-            val message = sendRequest(strUrl, hsParams, POST)
+            val message = sendRequest(strUrl, hsParams, GET)
             DLog.d("${TAG}_makeIntroRepository", "message=$message")
 
             val result = if (message.isNotEmpty()) {
