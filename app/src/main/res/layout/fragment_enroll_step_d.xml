@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_f4f4f4"
+    tools:context=".kimbsu.feature.enroll.view.EnrollStepDFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_enroll_title"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="@color/c_ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_enroll_titleLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="50dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_enroll_titleRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="50dp" />
+
+            <ImageView
+                android:id="@+id/iv_enroll_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/icon_title_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/gl_enroll_titleLeft"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_enroll_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/gray_900"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/gl_enroll_titleLeft"
+                app:layout_constraintRight_toLeftOf="@id/gl_enroll_titleRight"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_enroll_photo"
+            android:layout_width="0dp"
+            android:layout_height="478dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_enroll_stoneHomeTitle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_enroll_title">
+
+            <ImageView
+                android:id="@+id/iv_enroll_blurPhoto"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view_enroll_photoBackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="31dp"
+                android:background="@drawable/back_enroll_add_photo_step_b"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_enroll_addPhoto"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="12dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@id/view_enroll_photoBackground"
+                app:layout_constraintLeft_toLeftOf="@id/view_enroll_photoBackground"
+                app:layout_constraintRight_toRightOf="@id/view_enroll_photoBackground"
+                app:layout_constraintTop_toTopOf="@id/view_enroll_photoBackground"
+                app:strokeColor="@null" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_enroll_stoneHomeTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="23dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:text="돌의 고향"
+            android:textColor="@color/gray_600"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toTopOf="@id/cl_enroll_stoneHome"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_enroll_photo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_enroll_stoneHome"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="23dp"
+            android:background="@color/gray_100"
+            app:layout_constraintBottom_toTopOf="@id/tv_enroll_nextStep"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_enroll_stoneHomeTitle">
+
+            <ImageView
+                android:id="@+id/iv_enroll_stoneHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                android:src="@drawable/icon_enroll_location"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_enroll_stoneHome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/gray_800"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/iv_enroll_stoneHome"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_enroll_confirm"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/back_enroll_next_step"
+            android:gravity="center"
+            android:text="확인했어요"
+            android:textColor="@color/c_ffffff"
+            android:textSize="15dp"
+            app:layout_constraintTop_toBottomOf="@id/cl_enroll_stoneHome"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

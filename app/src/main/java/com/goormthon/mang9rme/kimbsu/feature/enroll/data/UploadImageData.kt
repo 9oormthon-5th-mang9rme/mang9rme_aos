@@ -8,7 +8,8 @@ data class UploadImageData(
     var bitmap: Bitmap?,
     var imgLat: Float?,
     var imgLng: Float?,
-    var imgCreateDate: String?
+    var imgCreateDate: String?,
+    var stoneType: String? = null
 ) {
 
     override fun toString(): String {

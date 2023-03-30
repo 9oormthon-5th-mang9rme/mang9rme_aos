@@ -8,12 +8,14 @@ import com.goormthon.mang9rme.kimbsu.feature.base.repository.BaseNetworkReposito
 import com.goormthon.mang9rme.kimbsu.feature.enroll.data.UploadImageData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
-import java.io.DataOutputStream
 import java.io.File
-import java.io.FileInputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import java.net.URLEncoder
 
 class EnrollNetworkRepository(
     private val application: Application
@@ -50,49 +52,153 @@ class EnrollNetworkRepository(
         }
     }
 
-    suspend fun makeEnrollStoneRequest(pUploadImageData: UploadImageData) {
+    suspend fun makeEnrollStoneRequest(pUploadImageData: UploadImageData, pAddress: String) {
         withContext(Dispatchers.IO) {
-            val fileName = pUploadImageData.fileName
+//            OkHttpClient client = new OkHttpClient().newBuilder()
+//                .build();
+//            MediaType mediaType = MediaType . parse ("text/plain");
+//            RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+//                .addFormDataPart(
+//                    "image", "구름톤-001.png",
+//                    RequestBody.create(
+//                        MediaType.parse("application/octet-stream"),
+//                        new File ("/Users/imsehwan/Downloads/구름톤-001.png")
+//                    )
+//                )
+//                .addFormDataPart(
+//                    "uploadStoneRequest", null,
+//                    RequestBody.create(
+//                        MediaType.parse("application/json"), "{
+//                        \"dateTime\":\"2023-03-31T08:10:12\",
+//                    \"address\":\"제주시 애월\",
+//            \"lat\":\"123\",
+//            \"lng\":\"456\",
+//            \"stoneType\":\"화강암\"
+//        }".getBytes()))
+//        .build();
+//        Request request = new Request.Builder()
+//            .url("http://a076aee9f550c48b79e31c682f9f7789-324101715.ap-northeast-2.elb.amazonaws.com/api/stone")
+//            .method("POST", body)
+//            .build();
+//        Response response = client . newCall (request).execute();
 
-            val strUrl = "${BASE_URL}/api/stone"
-            try {
-                val url = URL(strUrl)
-                val connection: HttpURLConnection =
-                    (url.openConnection() as HttpURLConnection).apply {
-                        requestMethod = POST
-                        doOutput = true
+            val client = OkHttpClient()
 
-                        setRequestProperty(
-                            "Content-Type",
-                            "multipart/form-data; boundary=$BOUNDARY"
-                        )
-                        setRequestProperty("User-Agent", "Android")
-                        setRequestProperty("Connection", "Keep-Alive")
-                    }
-                val outputStream = DataOutputStream(connection.outputStream)
-                outputStream.writeBytes("--$BOUNDARY\r\n")
-                outputStream.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"$fileName\"\r\n")
-                outputStream.writeBytes("Content-Type: multipart/form-data; boundary=$BOUNDARY\r\n\r\n")
-
-                val imgFile = File(pUploadImageData.filePath)
-                val inputStream = FileInputStream(imgFile)
-
-                val buffer = ByteArray(4096)
-                var bytesRead: Int
-                while (inputStream.read(buffer).also { bytesRead = it } != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    DLog.d(TAG,"HTTP_OK")
-                } else {
-                    DLog.e(TAG,"FAIL")
-                }
-            } catch (e: Exception) {
-
+            val obj = JSONObject().apply {
+                put("dateTime", pUploadImageData.imgCreateDate ?: "")
+                put("address", pAddress)
+                put("lat", pUploadImageData.imgLat ?: "")
+                put("lng", pUploadImageData.imgLng ?: "")
+                put("stoneType", pUploadImageData.stoneType ?: "")
             }
+            val file = File(pUploadImageData.filePath)
+            DLog.d(TAG, "fileName=${file.name}, filePath=${pUploadImageData.filePath}")
+            val requestBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(
+                    "image",
+                    file.name,
+                    file.asRequestBody("image/*".toMediaTypeOrNull())
+                )
+                .addFormDataPart(
+                    "uploadStoneRequest", obj.toString()
+//                    "{ \"dateTime\": \"${pUploadImageData.imgCreateDate ?: ""}\", \"address\": \"${pAddress}\", \"lat\": \"${pUploadImageData.imgLat ?: ""}\", \"lng\": \"${pUploadImageData.imgLng ?: ""}\", \"stoneType\": \"${pUploadImageData.stoneType ?: ""}\" }"
+                )
+                .build()
+
+            val request = Request.Builder()
+                .url("${BASE_URL}/api/stone")
+                .post(requestBody)
+                .build()
+
+            val response = client.newCall(request).execute()
+            DLog.d(TAG, "response=$response")
         }
+//        withContext(Dispatchers.IO) {
+//            val fileName = pUploadImageData.fileName
+//
+//            val strUrl = "${BASE_URL}/api/stone"
+//            try {
+//                val url = URL(strUrl)
+//                val connection: HttpURLConnection =
+//                    (url.openConnection() as HttpURLConnection).apply {
+//                        requestMethod = POST
+//                        doOutput = true
+//
+//                        setRequestProperty(
+//                            "Content-Type",
+//                            "multipart/form-data; boundary=$BOUNDARY"
+//                        )
+//                        setRequestProperty("User-Agent", "Android")
+//                        setRequestProperty("Connection", "Keep-Alive")
+//                    }
+//                val outputStream = DataOutputStream(connection.outputStream)
+//                outputStream.writeBytes("--$BOUNDARY\r\n")
+//                outputStream.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"$fileName\"\r\n")
+//                outputStream.writeBytes("Content-Type: multipart/form-data; boundary=$BOUNDARY\r\n\r\n")
+//
+//                val imgFile = File(pUploadImageData.filePath)
+//                val inputStream = FileInputStream(imgFile)
+//
+//                val buffer = ByteArray(4096)
+//                var bytesRead: Int
+//                while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+//                    outputStream.write(buffer, 0, bytesRead);
+//                }
+//
+//                inputStream.close()
+//                outputStream.flush()
+//                outputStream.close()
+//
+////                val os = connection.outputStream
+////                val writer = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
+////
+////                val strParams = getParams(hashMapOf<String, String>().apply {
+////                    put("uploadStoneRequest", JSONObject().apply {
+////                        put("dateTime", pUploadImageData.imgCreateDate ?: "")
+////                        put("address", pAddress)
+////                        put("lat", pUploadImageData.imgLat ?: "")
+////                        put("lng", pUploadImageData.imgLng ?: "")
+////                        put("stoneType", pUploadImageData.stoneType ?: "")
+////                    }.toString())
+////                })
+////                writer.write(strParams)
+////
+////                writer.flush()
+////                writer.close()
+////
+////                os.flush()
+////                os.close()
+//
+//                val responseCode = connection.responseCode
+//                DLog.d(TAG, "responseCode=$responseCode")
+//                if (responseCode == HttpURLConnection.HTTP_OK) {
+//                    DLog.d(TAG, "HTTP_OK")
+//                } else {
+//                    DLog.e(TAG, "FAIL")
+//                }
+//            } catch (e: Exception) {
+//                DLog.e(TAG, e.message, e)
+//            }
+//        }
+    }
+
+    private fun getParams(hsParams: HashMap<String, String>): String {
+        val sb = StringBuilder()
+
+        val iterator = hsParams.entries.iterator()
+        while (iterator.hasNext()) {
+            val entry = iterator.next()
+
+            if (sb.isNotEmpty())
+                sb.append("&")
+
+            sb.append(URLEncoder.encode(entry.key, "UTF-8"))
+            sb.append("=")
+            sb.append(URLEncoder.encode(entry.value, "UTF-8"))
+        }
+
+        return sb.toString()
     }
 
     companion object {

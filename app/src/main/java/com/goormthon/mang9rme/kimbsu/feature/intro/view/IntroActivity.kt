@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.animation.doOnEnd
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.goormthon.mang9rme.R
@@ -69,7 +70,7 @@ class IntroActivity : BaseActivity() {
                 animatorSet.play(valueAnimator)
                 animatorSet.start()
             }
-            
+
             val jumpAnimator = ValueAnimator
                 .ofFloat(0f, -50f, 0f)
                 .setDuration(500)
@@ -81,6 +82,11 @@ class IntroActivity : BaseActivity() {
                 animatorSet.interpolator = AccelerateDecelerateInterpolator()
                 animatorSet.play(jumpAnimator)
                 animatorSet.start()
+
+                animatorSet.doOnEnd {
+                    animatorSet.startDelay = 500
+                    animatorSet.start()
+                }
             }
         })
     }

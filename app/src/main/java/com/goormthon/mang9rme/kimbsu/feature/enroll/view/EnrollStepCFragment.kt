@@ -124,7 +124,12 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) 1f else 0.3f
+            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) {
+                model.calculateStoneType()
+                1f
+            } else {
+                0.3f
+            }
         })
 
         model.dotQuestionAnswer.observe(requireActivity(), Observer { dotQuestionAnswer ->
@@ -205,7 +210,12 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) 1f else 0.3f
+            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) {
+                model.calculateStoneType()
+                1f
+            } else {
+                0.3f
+            }
         })
 
         model.colorQuestionAnswer.observe(requireActivity(), Observer { colorQuestionAnswer ->
@@ -286,7 +296,12 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) 1f else 0.3f
+            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) {
+                model.calculateStoneType()
+                1f
+            } else {
+                0.3f
+            }
         })
     }
 
