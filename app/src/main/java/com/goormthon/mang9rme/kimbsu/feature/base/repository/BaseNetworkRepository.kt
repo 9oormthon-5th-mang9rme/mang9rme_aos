@@ -130,6 +130,8 @@ open class BaseNetworkRepository(
     }
 
     companion object {
+        const val BASE_URL: String = "http://a076aee9f550c48b79e31c682f9f7789-324101715.ap-northeast-2.elb.amazonaws.com"
+
         const val POST: String = "POST"
         const val GET: String = "GET"
         const val PUT: String = "PUT"

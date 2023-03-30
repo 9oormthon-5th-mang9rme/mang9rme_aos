@@ -96,7 +96,49 @@ class JsonParserUtil {
     // endregion Base Function
 
     fun getStoneDataList(jsonRoot: JSONObject): ArrayList<StoneData> {
-        return arrayListOf()
+        val dataArray = getJSONArray(jsonRoot, "data")
+
+        val stoneDataList = arrayListOf<StoneData>()
+        if (dataArray != null) {
+            for (idx in 0 until dataArray.length()) {
+                if (!dataArray.isNull(idx)) {
+                    val obj = dataArray.getJSONObject(idx)
+
+                    val stoneId = getInt(obj, "stoneId")
+                    val stoneName = getString(obj, "stoneName")
+                    val stoneType = getString(obj, "stoneType")
+                    val dateTime = getString(obj, "dateTime")
+                    val address = getString(obj, "address")
+                    val imgUrl = getString(obj, "imageUrl")
+                    val rarity = getString(obj, "rarity")
+                    val attack = getInt(obj, "attack")
+                    val defense = getInt(obj, "defense")
+                    val magicDefense = getInt(obj, "magicDefense")
+                    val lat = getString(obj, "lat")
+                    val lng = getString(obj, "lng")
+                    val level = getString(obj, "level")
+
+                    val stoneData = StoneData(
+                        stoneId,
+                        imgUrl,
+                        stoneName,
+                        stoneType,
+                        dateTime,
+                        address,
+                        lat,
+                        lng,
+                        level,
+                        rarity,
+                        attack,
+                        defense,
+                        magicDefense
+                    )
+                    stoneDataList.add(stoneData)
+                }
+            }
+        }
+
+        return stoneDataList
     }
 
     fun getAddressData(jsonRoot: JSONObject): String {

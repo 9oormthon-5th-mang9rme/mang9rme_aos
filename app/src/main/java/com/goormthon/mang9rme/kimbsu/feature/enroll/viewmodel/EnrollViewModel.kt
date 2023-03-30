@@ -32,6 +32,29 @@ class EnrollViewModel(
     private val _address: MutableLiveData<String> = MutableLiveData()
     val address: LiveData<String> get() = _address
 
+    /**
+     * 구멍 개수 질문
+     */
+    private val _holeQuestionAnswer: MutableLiveData<Int> = MutableLiveData(-1)
+    val holeQuestionAnswer: LiveData<Int> get() = _holeQuestionAnswer
+
+    /**
+     * 점 개수 질문
+     */
+    private val _dotQuestionAnswer: MutableLiveData<Int> = MutableLiveData(-1)
+    val dotQuestionAnswer: LiveData<Int> get() = _dotQuestionAnswer
+
+    /**
+     * 색상 질문
+     */
+    private val _colorQuestionAnswer: MutableLiveData<Int> = MutableLiveData(-1)
+    val colorQuestionAnswer: LiveData<Int> get() = _colorQuestionAnswer
+
+    /**
+     * 모든 질문을 체크했는지 여부
+     */
+    val allQuestionCheck: Boolean get() = holeQuestionAnswer.value != -1 && dotQuestionAnswer.value != -1 && colorQuestionAnswer.value != -1
+
     fun requestCoordToAddress(pLat: Float?, pLng: Float?) {
         viewModelScope.launch {
             if (pLat != null && pLng != null) {
@@ -142,6 +165,18 @@ class EnrollViewModel(
                 }
             }
         }
+    }
+
+    fun setHoleQuestionAnswer(pAnswer: Int) {
+        _holeQuestionAnswer.value = pAnswer
+    }
+
+    fun setDotQuestionAnswer(pAnswer: Int) {
+        _dotQuestionAnswer.value = pAnswer
+    }
+
+    fun setColorQuestionAnswer(pAnswer: Int) {
+        _colorQuestionAnswer.value = pAnswer
     }
 
     companion object {

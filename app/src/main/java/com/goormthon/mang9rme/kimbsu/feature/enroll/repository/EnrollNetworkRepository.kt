@@ -45,7 +45,9 @@ class EnrollNetworkRepository(
     }
 
     suspend fun makeEnrollStoneRequest() {
-
+        withContext(Dispatchers.IO) {
+            val strUrl = "${BASE_URL}/api/stone"
+        }
     }
 
     companion object {
