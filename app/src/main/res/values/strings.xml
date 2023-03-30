@@ -10,4 +10,10 @@
 
     <string name="main_filter_sort_time">최신순</string>
     <string name="main_filter_sort_level">레벨순</string>
+
+    <string name="stone_card_attack">공격력</string>
+    <string name="stone_card_defence">방어력</string>
+    <string name="stone_card_magic_defence">마법저항력</string>
+
+    <string name="stone_region">돌의 고향</string>
 </resources>

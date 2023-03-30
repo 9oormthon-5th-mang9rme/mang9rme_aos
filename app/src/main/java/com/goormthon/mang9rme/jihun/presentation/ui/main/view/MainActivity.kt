@@ -90,8 +90,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun openDetailActivity(position: Int) {
-        viewModel.setLocation(37.53737528 + position, 127.00557633 + position)
-        showMapDialog()
+
+
+
+        //:TODO 지도 로직
+        /* viewModel.setLocation(37.53737528 + position, 127.00557633 + position)
+        showMapDialog() */
     }
 
     private fun showMapDialog() {
