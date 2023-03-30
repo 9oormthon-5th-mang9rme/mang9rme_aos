@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="stoneData"
             type="com.goormthon.mang9rme.common.data.StoneData" />
@@ -27,25 +28,25 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/icon_title_back"
                 android:layout_marginStart="13dp"
                 android:onClick="@{() -> activity.dismiss()}"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/icon_title_back"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{stoneData.dateTime}"
-                android:textSize="16sp"
-                android:textColor="@color/gray_900"
                 android:fontFamily="@font/pretendard_medium"
-                tools:text="3월 30일 목요일"
-                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{stoneData.dateTime}"
+                android:textColor="@color/gray_900"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="3월 30일 목요일" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -54,8 +55,8 @@
             android:id="@+id/detail_layout_contain_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/c_f4f4f4"
             android:layout_margin="30dp"
+            android:background="@color/c_f4f4f4"
             app:layout_constraintTop_toBottomOf="@id/detail_layout_toolbar">
 
             <include
@@ -79,41 +80,40 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
             android:background="@color/c_f4f4f4"
             android:onClick="@{() -> activity.openMap()}"
-            app:layout_constraintTop_toBottomOf="@id/detail_tv_stone_region"
-            app:layout_constraintStart_toStartOf="@id/detail_tv_stone_region" >
-            
+            app:layout_constraintStart_toStartOf="@id/detail_tv_stone_region"
+            app:layout_constraintTop_toBottomOf="@id/detail_tv_stone_region">
+
             <ImageView
                 android:id="@+id/detail_iv_location_marker"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/icon_enroll_location"
-                app:tint="@color/c_262525"
                 android:layout_marginVertical="14dp"
                 android:layout_marginStart="12dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/icon_enroll_location"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/c_262525" />
 
             <TextView
                 android:id="@+id/detail_tv_location_addresss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/pretendard_medium"
                 android:text="@{stoneData.address}"
                 android:textColor="@color/gray_800"
-                android:fontFamily="@font/pretendard_medium"
                 android:textSize="15sp"
-                android:layout_marginStart="4dp"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/detail_iv_location_marker"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="제주시 아라동" />
 
 
-            
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

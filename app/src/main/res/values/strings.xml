@@ -38,4 +38,6 @@
     <string name="feed_null_title">아직 수집한 돌이 없어요</string>
     <string name="feed_null_subtitle">제주도 돌 가져가지 말고\n여기에 보관해보세요</string>
 
+    <string name="feed_stone_rarity">%s등급</string>
+
 </resources>

@@ -6,14 +6,26 @@
     android:layout_height="wrap_content"
     android:background="@drawable/back_card_stone_stat">
 
-    <TextView
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/stone_char_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids=""/>
+
+
+
+    <EditText
         android:id="@+id/item_card_stone_stat_tv_stone_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
+        android:background="@android:color/transparent"
         android:fontFamily="@font/yangjin"
         android:textColor="@color/c_262525"
         android:textSize="20sp"
+        android:maxLines="1"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
