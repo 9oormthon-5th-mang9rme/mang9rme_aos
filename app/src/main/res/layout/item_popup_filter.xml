@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/back_popup_filter"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/item_popup_filter_sort_with_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_filter_sort_time"
+            android:textSize="13sp"
+            android:textColor="@color/c_262525"
+            android:paddingHorizontal="28dp"
+            android:paddingVertical="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/c_eaeaea" />
+        
+        <TextView
+            android:id="@+id/item_popup_filter_sort_with_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_filter_sort_level"
+            android:textSize="13sp"
+            android:textColor="@color/c_262525"
+            android:paddingHorizontal="28dp"
+            android:paddingVertical="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false" />
+        
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,4 +5,9 @@
     <string name="toast_msg_error_002">네트워크 연결이 필요합니다.\n네트워크 연결 후에 다시 실행해주세요.</string>
 
     <string name="toast_msg_back_pressed">뒤로 가기를 한 번 더 누르면 종료됩니다.</string>
+
+    <string name="main_what_i_got">내가 수집한 돌</string>
+
+    <string name="main_filter_sort_time">최신순</string>
+    <string name="main_filter_sort_level">레벨순</string>
 </resources>
