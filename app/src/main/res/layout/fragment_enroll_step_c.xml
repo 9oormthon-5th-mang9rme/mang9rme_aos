@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_f4f4f4"
+    tools:context=".kimbsu.feature.enroll.view.EnrollStepCFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_enroll_title"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/c_ffffff"
+        app:layout_constraintBottom_toTopOf="@id/tv_enroll_question_hole"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_enroll_titleLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="50dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_enroll_titleRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="50dp" />
+
+        <ImageView
+            android:id="@+id/iv_enroll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/icon_title_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/gl_enroll_titleLeft"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enroll_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="내 돌을 소개합니다 (내돌소)"
+            android:textColor="@color/gray_900"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/gl_enroll_titleLeft"
+            app:layout_constraintRight_toLeftOf="@id/gl_enroll_titleRight"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_enroll_question_hole"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+        android:text="@string/enroll_step_c_question_001"
+        android:textColor="@color/c_000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/cl_enroll_answer_hole"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_enroll_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_enroll_answer_hole"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/back_enroll_answer"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_enroll_question_hole">
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_hole_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_001_answer_001"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/view_answer_hole_divider1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_answer_hole_divider1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_hole_1"
+            app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_hole_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_hole_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_001_answer_002"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/view_answer_hole_divider1"
+            app:layout_constraintRight_toLeftOf="@id/view_answer_hole_divider2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_answer_hole_divider2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_hole_2"
+            app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_hole_3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_hole_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_001_answer_003"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/view_answer_hole_divider2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_enroll_question_dot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+        android:text="@string/enroll_step_c_question_002"
+        android:textColor="@color/c_000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/cl_enroll_dot_hole"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_enroll_answer_hole" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_enroll_dot_hole"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/back_enroll_answer"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_enroll_question_dot">
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_dot_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_002_answer_001"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/view_answer_dot_divider1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_answer_dot_divider1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_dot_1"
+            app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_dot_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_dot_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_002_answer_002"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/view_answer_dot_divider1"
+            app:layout_constraintRight_toLeftOf="@id/view_answer_dot_divider2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_answer_dot_divider2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_enroll_answer_dot_2"
+            app:layout_constraintRight_toLeftOf="@id/tv_enroll_answer_dot_3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enroll_answer_dot_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/enroll_step_c_question_002_answer_003"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/view_answer_dot_divider2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

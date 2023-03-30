@@ -18,4 +18,17 @@
     <color name="c_dadada">#dadada</color>
     <color name="c_f4f4f4">#f4f4f4</color>
     <color name="c_262525">#262525</color>
+    <color name="c_000000">#000000</color>
+
+    <color name="primary">#fd7b5b</color>
+    <color name="secondary">#00b6a7</color>
+    <color name="gray_100">#f4f4f4</color>
+    <color name="gray_200">#eaeaea</color>
+    <color name="gray_300">#dbdada</color>
+    <color name="gray_400">#b8b6b6</color>
+    <color name="gray_500">#989696</color>
+    <color name="gray_600">#656161</color>
+    <color name="gray_700">#373535</color>
+    <color name="gray_800">#262525</color>
+    <color name="gray_900">#101010</color>
 </resources>

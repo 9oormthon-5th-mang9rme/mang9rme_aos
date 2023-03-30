@@ -20,7 +20,9 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     protected fun dismissProgress() {
-        loadingProgressDialog.dismiss()
+        if (this::loadingProgressDialog.isInitialized) {
+            loadingProgressDialog.dismiss()
+        }
     }
     // endregion Base ProgressDialog Function
 
