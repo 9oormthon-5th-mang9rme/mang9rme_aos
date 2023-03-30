@@ -88,6 +88,14 @@ class EnrollViewModel(
         }
     }
 
+    fun requestStoneDataUpload() {
+        viewModelScope.launch {
+            uploadImageData.value?.let { uploadImageData ->
+                networkRepository.makeEnrollStoneRequest(uploadImageData)
+            }
+        }
+    }
+
     fun setSelectPhotoStatus(pStatus: SelectPhotoStatus) {
         if (selectPhotoStatus.value != pStatus)
             _selectPhotoStatus.value = pStatus

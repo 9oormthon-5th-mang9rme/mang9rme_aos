@@ -4,16 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/c_fff5f2"
     tools:context=".kimbsu.feature.intro.view.IntroActivity">
 
-    <ProgressBar
-        android:id="@+id/pb_intro"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:indeterminateTint="@color/c_9e9e9e"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/tv_intro_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/yangjin"
+        android:gravity="center"
+        android:text="제주돌여행"
+        android:textColor="@color/primary"
+        android:textSize="46dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_intro_description"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_intro_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_medium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="여행 중 발견한 제주돌을 담아보세요"
+        android:textColor="@color/gray_600"
+        android:textSize="17dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_intro_title" />
+
+    <ImageView
+        android:id="@+id/iv_intro_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="63dp"
+        android:src="@drawable/icon_intro_cloud"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_intro_description" />
+
+    <TextView
+        android:id="@+id/tv_intro_cloud"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="46dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="46dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="제주돌,\n가져가지 말고 기록허수깡!"
+        android:textColor="@color/c_262525"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_intro_fee"
+        app:layout_constraintLeft_toLeftOf="@id/iv_intro_cloud"
+        app:layout_constraintRight_toRightOf="@id/iv_intro_cloud"
+        app:layout_constraintTop_toTopOf="@id/iv_intro_cloud" />
+
+    <TextView
+        android:id="@+id/tv_intro_fee"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="무단 반출 시, 5년 이하의 징역 또는\n5천만원 이하의 벌금에 처해져요"
+        android:textColor="@color/gray_500"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/iv_intro_cloud"
+        app:layout_constraintRight_toRightOf="@id/iv_intro_cloud"
+        app:layout_constraintTop_toBottomOf="@id/tv_intro_cloud" />
+
+    <ImageView
+        android:id="@+id/iv_intro_stoneFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/icon_intro_stone_friends"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_intro_cloud" />
+
+    <TextView
+        android:id="@+id/tv_intro_start"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:alpha="0"
+        android:background="@drawable/back_enroll_next_step"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="시작하기"
+        android:textColor="@color/c_ffffff"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

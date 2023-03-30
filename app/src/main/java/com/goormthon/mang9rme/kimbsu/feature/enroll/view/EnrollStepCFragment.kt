@@ -124,7 +124,7 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-            binding.tvEnrollNextStep.alpha = if (model.allQuestionCheck) 1f else 0.3f
+            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) 1f else 0.3f
         })
 
         model.dotQuestionAnswer.observe(requireActivity(), Observer { dotQuestionAnswer ->
@@ -205,7 +205,7 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-            binding.tvEnrollNextStep.alpha = if (model.allQuestionCheck) 1f else 0.3f
+            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) 1f else 0.3f
         })
 
         model.colorQuestionAnswer.observe(requireActivity(), Observer { colorQuestionAnswer ->
@@ -286,13 +286,14 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-            binding.tvEnrollNextStep.alpha = if (model.allQuestionCheck) 1f else 0.3f
+            binding.tvEnrollSubmit.alpha = if (model.allQuestionCheck) 1f else 0.3f
         })
     }
 
     private fun init() {
         binding.apply {
             ivEnrollBack.setOnClickListener(this@EnrollStepCFragment)
+            tvEnrollSubmit.setOnClickListener(this@EnrollStepCFragment)
 
             tvEnrollAnswerHole1.setOnClickListener(this@EnrollStepCFragment)
             tvEnrollAnswerHole2.setOnClickListener(this@EnrollStepCFragment)
@@ -312,6 +313,13 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
             R.id.iv_enroll_back -> {
                 requireActivity().onBackPressed()
             }
+            // 돌 이미지 업로드
+            R.id.tv_enroll_submit -> {
+                if (model.allQuestionCheck) {
+                    model.requestStoneDataUpload()
+                }
+            }
+            // region answer
             R.id.tv_enroll_answer_hole_1 -> {
                 model.setHoleQuestionAnswer(0)
                 MangoormeVibrator.requestVibrate(
@@ -375,6 +383,7 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
                     MangoormeVibrator.VibrationType.TICK
                 )
             }
+            // endregion answer
         }
     }
 

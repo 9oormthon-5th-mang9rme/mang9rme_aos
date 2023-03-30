@@ -301,7 +301,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tv_enroll_nextStep"
+        android:id="@+id/tv_enroll_submit"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginLeft="20dp"
