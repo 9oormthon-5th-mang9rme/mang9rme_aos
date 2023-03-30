@@ -31,4 +31,12 @@
     <color name="gray_700">#373535</color>
     <color name="gray_800">#262525</color>
     <color name="gray_900">#101010</color>
+
+    <color name="c_989696">#989696</color>
+    <color name="c_ffeae5">#ffeae5</color>
+    <color name="c_fd7b5b">#fd7b5b</color>
+    <color name="c_656161">#656161</color>
+    <color name="c_eaeaea">#eaeaea</color>
+    <color name="c_dbdada">#dbdada</color>
+
 </resources>

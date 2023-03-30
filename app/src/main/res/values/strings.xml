@@ -25,4 +25,9 @@
     <string name="enroll_step_c_question_003_answer_003">회색ㆍ백색</string>
     <!--    endregion EnrollStepCFragment-->
 
+    <string name="main_what_i_got">내가 수집한 돌</string>
+
+    <string name="main_filter_sort_time">최신순</string>
+    <string name="main_filter_sort_level">레벨순</string>
+
 </resources>
