@@ -70,7 +70,7 @@ class FileUtil(
      */
     @Throws(IOException::class)
     fun copyFileToCacheFolder(strOriginPath: String): String {
-        val strFilePath: String = cachePath + "/" + getFileName()
+        val strFilePath: String = cachePath + "/" + getFileName() + ".jpg"
         val fileOrigin = File(strOriginPath)
         val fileCopy = File(strFilePath)
         val inOrigin = FileInputStream(fileOrigin)
@@ -100,7 +100,7 @@ class FileUtil(
         if (contentUri.scheme != "content")
             return copyFileToCacheFolder(contentUri.path!!)
 
-        val filePath = cachePath + "/" + getFileName()
+        val filePath = cachePath + "/" + getFileName() + ".jpg"
         val fileCopy = File(filePath)
 
         val inOrigin = mContext.contentResolver.openInputStream(contentUri)

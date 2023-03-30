@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.FragmentEnrollStepBBinding
 import com.goormthon.mang9rme.kimbsu.feature.enroll.viewmodel.EnrollViewModel
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 class EnrollStepBFragment : Fragment(), View.OnClickListener {
 
@@ -57,7 +60,10 @@ class EnrollStepBFragment : Fragment(), View.OnClickListener {
 
             model.uploadImageData.value?.let { uploadImageData ->
                 tvEnrollTitle.text = uploadImageData.imgCreateDate
-                ivEnrollBlurPhoto.setImageBitmap(uploadImageData.bitmap)
+                Glide.with(requireContext())
+                    .load(uploadImageData.bitmap)
+                    .apply(RequestOptions.bitmapTransform(BlurTransformation(30, 3)))
+                    .into(binding.ivEnrollBlurPhoto)
                 ivEnrollAddPhoto.setImageBitmap(uploadImageData.bitmap)
 
                 val lat = uploadImageData.imgLat

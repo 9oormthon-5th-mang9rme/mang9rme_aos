@@ -13,6 +13,8 @@ import com.goormthon.mang9rme.kimbsu.feature.enroll.repository.EnrollImageReposi
 import com.goormthon.mang9rme.kimbsu.feature.enroll.repository.EnrollNetworkRepository
 import kotlinx.coroutines.launch
 import java.io.File
+import kotlin.math.min
+import kotlin.math.sqrt
 
 class EnrollViewModel(
     private val networkRepository: EnrollNetworkRepository,
@@ -90,8 +92,9 @@ class EnrollViewModel(
 
     fun requestStoneDataUpload() {
         viewModelScope.launch {
+            setProgressFlag(true)
             uploadImageData.value?.let { uploadImageData ->
-                networkRepository.makeEnrollStoneRequest(uploadImageData)
+                networkRepository.makeEnrollStoneRequest(uploadImageData, address.value ?: "")
             }
         }
     }
@@ -162,6 +165,7 @@ class EnrollViewModel(
             when (selectPhotoStatus.value) {
                 SelectPhotoStatus.GALLERY -> {
                     val tmpData = imageRepository.requestImagePostProcess(contentUri)
+                    DLog.d(TAG,"contentUri=$contentUri, tmpData=$tmpData")
                     _uploadImageData.value = tmpData
                     _selectPhotoStatus.value = SelectPhotoStatus.SUCCESS
                 }
@@ -185,6 +189,31 @@ class EnrollViewModel(
 
     fun setColorQuestionAnswer(pAnswer: Int) {
         _colorQuestionAnswer.value = pAnswer
+    }
+
+    fun calculateStoneType() {
+        val x = holeQuestionAnswer.value ?: 0
+        val y = dotQuestionAnswer.value ?: 0
+        val z = colorQuestionAnswer.value ?: 0
+
+        /**
+         * 화강암 vector (0, 2, 1)
+         * 현무암 vector (1, 0, 1)
+         * 화산송이 vector (2, 0, 2)
+         * 석회암 vector (0, 0, 2)
+         */
+        val dist1 = sqrt(x * x + (y - 2.0) * (y - 2) + (z - 1.0) * (z - 1))
+        val dist2 = sqrt((x - 1.0) * (x - 1) + y * y + (z - 1.0) * (z - 1))
+        val dist3 = sqrt((x - 2.0) * (x - 2) + y * y + (z - 2.0) * (z - 2))
+        val dist4 = sqrt(x * x + y * y + (z - 2.0) * (z - 2))
+        val minValue = min(min(dist1, dist2), min(dist3, dist4))
+
+        uploadImageData.value?.stoneType = when (minValue) {
+            dist1 -> "화강암"
+            dist2 -> "현무암"
+            dist3 -> "화산송이"
+            else -> "석회암"
+        }
     }
 
     companion object {
