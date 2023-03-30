@@ -9,6 +9,7 @@ data class UploadImageData(
     var imgLat: Float?,
     var imgLng: Float?,
     var imgCreateDate: String?,
+    var imgCreateDateForServer: String?,
     var stoneType: String? = null
 ) {
 
@@ -18,7 +19,9 @@ data class UploadImageData(
                 "filePath=$filePath, " +
                 "imgLat=$imgLat, " +
                 "imgLng=$imgLng, " +
-                "imgCreateDate=$imgCreateDate}"
+                "imgCreateDate=$imgCreateDate" +
+                "imgCreateDateForServer=$imgCreateDateForServer, " +
+                "stoneType=$stoneType}"
     }
 
     companion object {

@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_f4f4f4"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".kimbsu.feature.enroll.view.EnrollStepCFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout

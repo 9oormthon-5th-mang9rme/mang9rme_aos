@@ -8,11 +8,9 @@ import com.goormthon.mang9rme.kimbsu.feature.base.repository.BaseNetworkReposito
 import com.goormthon.mang9rme.kimbsu.feature.enroll.data.UploadImageData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import java.io.File
 import java.net.URLEncoder
@@ -54,56 +52,25 @@ class EnrollNetworkRepository(
 
     suspend fun makeEnrollStoneRequest(pUploadImageData: UploadImageData, pAddress: String) {
         withContext(Dispatchers.IO) {
-//            OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//            MediaType mediaType = MediaType . parse ("text/plain");
-//            RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-//                .addFormDataPart(
-//                    "image", "구름톤-001.png",
-//                    RequestBody.create(
-//                        MediaType.parse("application/octet-stream"),
-//                        new File ("/Users/imsehwan/Downloads/구름톤-001.png")
-//                    )
-//                )
-//                .addFormDataPart(
-//                    "uploadStoneRequest", null,
-//                    RequestBody.create(
-//                        MediaType.parse("application/json"), "{
-//                        \"dateTime\":\"2023-03-31T08:10:12\",
-//                    \"address\":\"제주시 애월\",
-//            \"lat\":\"123\",
-//            \"lng\":\"456\",
-//            \"stoneType\":\"화강암\"
-//        }".getBytes()))
-//        .build();
-//        Request request = new Request.Builder()
-//            .url("http://a076aee9f550c48b79e31c682f9f7789-324101715.ap-northeast-2.elb.amazonaws.com/api/stone")
-//            .method("POST", body)
-//            .build();
-//        Response response = client . newCall (request).execute();
-
             val client = OkHttpClient()
 
             val obj = JSONObject().apply {
-                put("dateTime", pUploadImageData.imgCreateDate ?: "")
+                put("dateTime", pUploadImageData.imgCreateDateForServer ?: "")
                 put("address", pAddress)
                 put("lat", pUploadImageData.imgLat ?: "")
                 put("lng", pUploadImageData.imgLng ?: "")
                 put("stoneType", pUploadImageData.stoneType ?: "")
             }
             val file = File(pUploadImageData.filePath)
-            DLog.d(TAG, "fileName=${file.name}, filePath=${pUploadImageData.filePath}")
+            DLog.d(TAG, "fileName=${file.name}, filePath=${pUploadImageData.filePath}, absPath=${file.absolutePath}")
             val requestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart(
-                    "image",
-                    file.name,
-                    file.asRequestBody("image/*".toMediaTypeOrNull())
-                )
-                .addFormDataPart(
-                    "uploadStoneRequest", obj.toString()
-//                    "{ \"dateTime\": \"${pUploadImageData.imgCreateDate ?: ""}\", \"address\": \"${pAddress}\", \"lat\": \"${pUploadImageData.imgLat ?: ""}\", \"lng\": \"${pUploadImageData.imgLng ?: ""}\", \"stoneType\": \"${pUploadImageData.stoneType ?: ""}\" }"
-                )
+//                .addFormDataPart(
+//                    "image",
+//                    file.name,
+//                    file.asRequestBody("image/*".toMediaTypeOrNull())
+//                )
+                .addFormDataPart("uploadStoneRequest", obj.toString())
                 .build()
 
             val request = Request.Builder()
