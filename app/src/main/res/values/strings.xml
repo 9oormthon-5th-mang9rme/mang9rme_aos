@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Mang9rme</string>
+    <string name="app_name">돌켓몬 도감</string>
+
+    <string name="toast_msg_error_001">예기치 못한 오류가 발생했습니다. 잠시 후에 다시 시도해 주세요.</string>
+    <string name="toast_msg_error_002">네트워크 연결이 필요합니다.\n네트워크 연결 후에 다시 실행해주세요.</string>
+
+    <string name="toast_msg_back_pressed">뒤로 가기를 한 번 더 누르면 종료됩니다.</string>
 </resources>
