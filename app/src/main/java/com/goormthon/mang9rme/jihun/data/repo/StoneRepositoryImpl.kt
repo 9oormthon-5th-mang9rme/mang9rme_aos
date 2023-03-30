@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class StoneRepositoryImpl @Inject constructor(private val stoneService: StoneService) : StoneRepository{
 
-    override suspend fun getStoneData(): Result<List<StoneData>> {
+    override suspend fun getStoneFeedData(): Result<List<StoneData>> {
         val result = stoneService.getStoneFeedData()
         return if(result.isSuccessful) {
             Log.d("----", "getStoneData: ${result.body()?.data}")
@@ -21,6 +21,21 @@ class StoneRepositoryImpl @Inject constructor(private val stoneService: StoneSer
             }
         } else {
             Log.d("----", "getStoneData: FAIL")
+            Result.failure(IllegalArgumentException("서버 연결에 실패했어요!"))
+        }
+    }
+
+    override suspend fun getStoneData(stoneId: Int): Result<StoneData> {
+        val result = stoneService.getStoneData(stoneId)
+        return if(result.isSuccessful) {
+            Log.d("----", "getStoneData: ${result.body()?.data}")
+            if(result.body()?.let { it.resultCode == ""} == true) {
+                Result.success(result.body()!!.data)
+            } else {
+                Result.failure(IllegalArgumentException("서버 오류로 인해 응답이 오지 않았어요!"))
+            }
+        } else {
+            Log.d("----", "getStoneData: ${result.errorBody()}")
             Result.failure(IllegalArgumentException("서버 연결에 실패했어요!"))
         }
     }

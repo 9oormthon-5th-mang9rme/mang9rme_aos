@@ -1,37 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/c_f4f4f4"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="stoneData"
+            type="com.goormthon.mang9rme.common.data.StoneData" />
+
+        <variable
+            name="activity"
+            type="com.goormthon.mang9rme.jihun.presentation.ui.detail.view.DetailActivity" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/detail_layout_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/c_ffffff"
-        app:layout_constraintTop_toTopOf="parent" >
+        android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/c_ffffff"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_title_back"
+                android:layout_marginStart="13dp"
+                android:onClick="@{() -> activity.dismiss()}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{stoneData.dateTime}"
+                android:textSize="16sp"
+                android:textColor="@color/gray_900"
+                android:fontFamily="@font/pretendard_medium"
+                tools:text="3월 30일 목요일"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_layout_contain_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/c_f4f4f4"
+            android:layout_margin="30dp"
+            app:layout_constraintTop_toBottomOf="@id/detail_layout_toolbar">
+
+            <include
+                android:id="@+id/card_stone_stat"
+                layout="@layout/item_card_stone_stat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/detail_tv_stone_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/stone_region"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_layout_contain_card" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/c_f4f4f4"
+            android:onClick="@{() -> activity.openMap()}"
+            app:layout_constraintTop_toBottomOf="@id/detail_tv_stone_region"
+            app:layout_constraintStart_toStartOf="@id/detail_tv_stone_region" >
+            
+            <ImageView
+                android:id="@+id/detail_iv_location_marker"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/icon_enroll_location"
+                app:tint="@color/c_262525"
+                android:layout_marginVertical="14dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/detail_tv_location_addresss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{stoneData.address}"
+                android:textColor="@color/gray_800"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="15sp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_iv_location_marker"
+                tools:text="제주시 아라동" />
+
+
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include android:id="@+id/card_stone_stat"
-        layout="@layout/item_card_stone_stat"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_margin="30dp"
-        app:layout_constraintTop_toBottomOf="@id/detail_layout_toolbar" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/c_ffffff"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.ActivityIntroBinding
-import com.goormthon.mang9rme.jihun.main.view.MainActivity
+import com.goormthon.mang9rme.jihun.presentation.ui.main.view.MainActivity
 import com.goormthon.mang9rme.kimbsu.common.customview.MessageDialog
 import com.goormthon.mang9rme.kimbsu.common.util.DLog
 import com.goormthon.mang9rme.kimbsu.common.util.NetworkUtil

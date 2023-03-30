@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.FragmentEnrollStepCBinding
 
 class EnrollStepCFragment : Fragment(), View.OnClickListener {
@@ -38,7 +39,7 @@ class EnrollStepCFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-
+            R.id.
         }
     }
 

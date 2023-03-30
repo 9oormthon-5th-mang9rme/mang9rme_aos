@@ -8,10 +8,9 @@ import com.goormthon.mang9rme.kimbsu.feature.base.repository.BaseNetworkReposito
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import javax.inject.Inject
 
-class EnrollNetworkRepository(
-    private val application: Application
-) : BaseNetworkRepository(application, TAG) {
+class EnrollNetworkRepository (private val application: Application) : BaseNetworkRepository(application, TAG) {
 
     private val jsonParserUtil: JsonParserUtil = JsonParserUtil()
 

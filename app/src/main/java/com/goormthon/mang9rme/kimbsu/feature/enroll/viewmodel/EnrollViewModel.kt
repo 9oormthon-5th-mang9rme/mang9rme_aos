@@ -1,9 +1,11 @@
 package com.goormthon.mang9rme.kimbsu.feature.enroll.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.goormthon.mang9rme.common.util.UploadStoneRepositoryImpl
 import com.goormthon.mang9rme.kimbsu.common.util.DLog
 import com.goormthon.mang9rme.kimbsu.data.SelectPhotoStatus
 import com.goormthon.mang9rme.kimbsu.data.network.NetworkResult
@@ -12,9 +14,11 @@ import com.goormthon.mang9rme.kimbsu.feature.enroll.data.UploadImageData
 import com.goormthon.mang9rme.kimbsu.feature.enroll.repository.EnrollImageRepository
 import com.goormthon.mang9rme.kimbsu.feature.enroll.repository.EnrollNetworkRepository
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.io.File
 
 class EnrollViewModel(
+    private val uploadStoneRepo : UploadStoneRepositoryImpl,
     private val networkRepository: EnrollNetworkRepository,
     private val imageRepository: EnrollImageRepository
 ) : BaseViewModel() {
@@ -140,6 +144,16 @@ class EnrollViewModel(
                         "Inappropriate PhotoStatus, ${selectPhotoStatus.value}"
                     )
                 }
+            }
+        }
+    }
+
+    fun postStoneData(image : MultipartBody.Part?, body : UploadImageData) {
+        if(image != null) {
+            viewModelScope.launch {
+                uploadStoneRepo.uploadImage(image, body)
+                    .onSuccess { Log.d(TAG, "postStoneData: SUCCESS") }
+                    .onFailure { Log.d(TAG, "postStoneData: FAIL") }
             }
         }
     }

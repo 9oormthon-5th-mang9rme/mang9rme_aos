@@ -9,5 +9,5 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 @BindingAdapter("setRadiusImage")
 fun ImageView.setIV(path : Any?) {
     Glide.with(this).load(path)
-        .transform(CenterCrop(), RoundedCorners(10)).into(this)
+        .transform(CenterCrop(), RoundedCorners(50)).into(this)
 }

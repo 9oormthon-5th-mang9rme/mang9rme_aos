@@ -4,5 +4,7 @@ import com.goormthon.mang9rme.common.data.StoneData
 
 interface StoneRepository {
 
-    suspend fun getStoneData() : Result<List<StoneData>>
+    suspend fun getStoneFeedData() : Result<List<StoneData>>
+
+    suspend fun getStoneData(stoneId : Int) : Result<StoneData>
 }

@@ -1,5 +1,7 @@
 package com.goormthon.mang9rme.jihun.presentation.di
 
+import com.goormthon.mang9rme.common.util.UploadStoneRepository
+import com.goormthon.mang9rme.common.util.UploadStoneRepositoryImpl
 import com.goormthon.mang9rme.jihun.data.repo.StoneRepository
 import com.goormthon.mang9rme.jihun.data.repo.StoneRepositoryImpl
 import dagger.Binds
@@ -14,4 +16,6 @@ abstract class RepositoryModule {
     @Binds
     abstract fun bindStoneRepository(stoneRepositoryImpl : StoneRepositoryImpl): StoneRepository
 
+    @Binds
+    abstract fun bindStoneRepository(uploadStoneRepositoryImpl: UploadStoneRepositoryImpl): UploadStoneRepository
 }

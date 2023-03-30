@@ -42,6 +42,8 @@
         <activity
             android:name=".jihun.presentation.ui.main.view.MainActivity"
             android:exported="true" />
+        <activity android:name=".jihun.presentation.ui.detail.view.DetailActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

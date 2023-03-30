@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.ActivityMainBinding
 import com.goormthon.mang9rme.databinding.ItemPopupFilterBinding
+import com.goormthon.mang9rme.jihun.presentation.ui.detail.view.DetailActivity
 import com.goormthon.mang9rme.jihun.presentation.ui.main.adapter.StoneFeedAdapter
 import com.goormthon.mang9rme.jihun.presentation.ui.main.viewmodel.MainViewModel
 import com.goormthon.mang9rme.kimbsu.feature.enroll.view.EnrollActivity
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initView() {
         binding.mainRvContents.adapter =
-            StoneFeedAdapter(this, ::openDetailActivity).also { adapter = it }
+            StoneFeedAdapter(::openDetailActivity).also { adapter = it }
     }
 
     override fun onStart() {
@@ -75,7 +76,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         {
             if (it.resultCode == RESULT_OK) {
-                Snackbar.make(binding.root, "수집한 돌이 등록되었어요", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "수집한 돌이 등록되었어요", Snackbar.LENGTH_SHORT).apply {
+                    anchorView = binding.mainTvFilter
+                    show()
+                }
                 viewModel.getStoneFeedData()
             }
         }
@@ -83,30 +87,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun observe() {
         viewModel.stoneFeedData.observe(this) {
             adapter.submitList(it.sortedByDescending { data -> data.dateTime })
+            adapter.notifyDataSetChanged()
         }
         viewModel.userToastMsg.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun openDetailActivity(position: Int) {
+    private fun openDetailActivity(stoneId: Int) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("targetStone", stoneId)
+        startActivity(intent)
 
-
-
-        //:TODO 지도 로직
-        /* viewModel.setLocation(37.53737528 + position, 127.00557633 + position)
-        showMapDialog() */
     }
-
-    private fun showMapDialog() {
-        MapDialogFragment().show(
-            supportFragmentManager, "MapDialog"
-        )
-    }
-
 
     fun openFilter() {
-
         popupWindow = PopupWindow(
             popup.root,
             binding.mainLayoutFilter.width + 80,
@@ -123,6 +118,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.item_popup_filter_sort_with_time -> {
+                Snackbar.make(binding.mainTvFilter, "수집한 돌이 등록되었어요", Snackbar.LENGTH_SHORT).apply {
+                    setAnchorView(binding.mainTvFilter)
+                    show()
+                }
+
                 popup.itemPopupFilterSortWithTime.typeface =
                     ResourcesCompat.getFont(this, com.goormthon.mang9rme.R.font.pretendard_semibold)
                 popup.itemPopupFilterSortWithLevel.typeface =
