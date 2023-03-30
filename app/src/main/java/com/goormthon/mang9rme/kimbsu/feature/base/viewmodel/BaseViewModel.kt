@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.goormthon.mang9rme.kimbsu.feature.main.repository.MainRepository
-import com.goormthon.mang9rme.kimbsu.feature.main.viewmodel.MainViewModel
 
 open class BaseViewModel : ViewModel() {
 
@@ -48,13 +46,13 @@ open class BaseViewModel : ViewModel() {
     class Factory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             // MainActivity ViewModel
-            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-                return MainViewModel(MainRepository(application)) as T
-            }
+//            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+//                return MainViewModel(MainRepository(application)) as T
+//            }
             // 식별되지 않은 ViewModel
-            else {
+//            else {
                 throw IllegalArgumentException("Unknown ViewModel Class!")
-            }
+//            }
         }
     }
 

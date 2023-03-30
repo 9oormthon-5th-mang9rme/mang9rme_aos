@@ -1,13 +1,11 @@
 package com.goormthon.mang9rme.kimbsu.feature.intro.view
 
-import android.content.Intent
 import android.os.Bundle
 import com.goormthon.mang9rme.R
+import com.goormthon.mang9rme.databinding.ActivityIntroBinding
 import com.goormthon.mang9rme.kimbsu.common.customview.MessageDialog
 import com.goormthon.mang9rme.kimbsu.common.util.NetworkUtil
-import com.goormthon.mang9rme.databinding.ActivityIntroBinding
 import com.goormthon.mang9rme.kimbsu.feature.base.view.BaseActivity
-import com.goormthon.mang9rme.kimbsu.feature.main.view.MainActivity
 
 class IntroActivity : BaseActivity() {
 
@@ -30,9 +28,7 @@ class IntroActivity : BaseActivity() {
     private fun init() {
         // network connected
         if (NetworkUtil.checkNetworkEnable(this)) {
-            val mainIntent = Intent(this, MainActivity::class.java)
-            startActivity(mainIntent)
-            finish()
+
         }
         // network not connected
         else {
