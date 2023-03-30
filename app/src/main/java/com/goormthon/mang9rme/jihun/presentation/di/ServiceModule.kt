@@ -1,6 +1,5 @@
 package com.goormthon.mang9rme.jihun.presentation.di
 
-import com.goormthon.mang9rme.common.util.UploadStoneService
 import com.goormthon.mang9rme.jihun.data.api.StoneService
 import dagger.Module
 import dagger.Provides
@@ -17,9 +16,4 @@ class ServiceModule {
     @Singleton
     fun provideStoneService(retrofit: Retrofit): StoneService =
         retrofit.create(StoneService::class.java)
-
-    @Provides
-    @Singleton
-    fun provideUploadStoneService(retrofit: Retrofit): UploadStoneService =
-        retrofit.create(UploadStoneService::class.java)
 }
