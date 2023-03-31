@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_f4f4f4"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".kimbsu.feature.enroll.view.EnrollStepCFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +55,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="내 돌을 소개합니다 (내돌소)"
+            android:text="내 돌을 소개합니다"
             android:textColor="@color/gray_900"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"

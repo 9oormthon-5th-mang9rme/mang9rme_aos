@@ -27,6 +27,9 @@ class EnrollImageRepository(
     private val dateFormatter: SimpleDateFormat by lazy {
         SimpleDateFormat("MM월 dd일 E요일")
     }
+    private val dateServerFormatter: SimpleDateFormat by lazy {
+        SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    }
 
     /**
      * 카메라 앱에서 찍은 이미지의 원본을 저장하기 위한 임시파일을 생성하는 함수
@@ -68,6 +71,7 @@ class EnrollImageRepository(
             var imgLat: Float? = null
             var imgLng: Float? = null
             var imgCreateDate: String? = null
+            var imgCreateDateForServer: String? = null
             try {
                 val exif = ExifInterface(pFile)
 
@@ -77,6 +81,7 @@ class EnrollImageRepository(
                 exif.getAttribute(ExifInterface.TAG_DATETIME)?.let { dateTime ->
                     exifDateFormatter.parse(dateTime, ParsePosition(0))?.let { date ->
                         imgCreateDate = dateFormatter.format(date)
+                        imgCreateDateForServer = dateServerFormatter.format(date).replace(' ', 'T')
                     }
                 }
             } catch (e: Exception) {
@@ -87,7 +92,15 @@ class EnrollImageRepository(
             val bmp2048 = imageUtil.createResizeBitmap(cachePath, 2048, originImgSize)
 
             val fileName = cachePath.substring(cachePath.lastIndexOf("/") + 1)
-            UploadImageData(fileName, cachePath, bmp2048, imgLat, imgLng, imgCreateDate)
+            UploadImageData(
+                fileName,
+                cachePath,
+                bmp2048,
+                imgLat,
+                imgLng,
+                imgCreateDate,
+                imgCreateDateForServer
+            )
         }
     }
 
@@ -103,6 +116,7 @@ class EnrollImageRepository(
             var imgLat: Float? = null
             var imgLng: Float? = null
             var imgCreateDate: String? = null
+            var imgCreateDateForServer: String? = null
             application.contentResolver.openInputStream(pContentUri)?.let { inputStream ->
                 try {
                     val exif = ExifInterface(inputStream)
@@ -113,6 +127,7 @@ class EnrollImageRepository(
                     exif.getAttribute(ExifInterface.TAG_DATETIME)?.let { dateTime ->
                         exifDateFormatter.parse(dateTime, ParsePosition(0))?.let { date ->
                             imgCreateDate = dateFormatter.format(date)
+                            imgCreateDateForServer = dateServerFormatter.format(date)
                         }
                     }
                 } catch (e: IOException) {
@@ -126,7 +141,15 @@ class EnrollImageRepository(
             val bmp2048 = imageUtil.createResizeBitmap(cachePath, 2048, originImgSize)
 
             val fileName = cachePath.substring(cachePath.lastIndexOf("/") + 1)
-            UploadImageData(fileName, cachePath, bmp2048, imgLat, imgLng, imgCreateDate)
+            UploadImageData(
+                fileName,
+                cachePath,
+                bmp2048,
+                imgLat,
+                imgLng,
+                imgCreateDate,
+                imgCreateDateForServer
+            )
         }
     }
 

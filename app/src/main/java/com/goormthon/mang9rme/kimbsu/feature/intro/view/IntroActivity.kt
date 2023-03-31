@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.animation.doOnEnd
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.goormthon.mang9rme.R
@@ -34,9 +35,15 @@ class IntroActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        window?.statusBarColor = ContextCompat.getColor(this, R.color.c_fff5f2)
 
         setObserver()
         init()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        window?.statusBarColor = ContextCompat.getColor(this, R.color.c_ffffff)
     }
 
     private fun setObserver() {
