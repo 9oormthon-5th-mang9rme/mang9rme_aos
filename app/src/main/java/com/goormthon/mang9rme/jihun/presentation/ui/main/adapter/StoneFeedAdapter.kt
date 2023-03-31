@@ -30,7 +30,6 @@ class StoneFeedAdapter(private val onFeedClick : ((Int) -> Unit)? = null) : List
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("----", "onCreateViewHolder: ${currentList.size} / ${itemCount} / ${viewType}")
         return when(viewType) {
           0 -> StoneFeedNullViewHolder(ItemMainRvWhenNullBinding.inflate(LayoutInflater.from(parent.context), parent, false))
           else -> StoneFeedViewHolder(ItemMainRvContentsBinding.inflate(LayoutInflater.from(parent.context), parent, false))

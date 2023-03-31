@@ -6,14 +6,28 @@
     android:layout_height="wrap_content"
     android:background="@drawable/back_card_stone_stat">
 
-    <TextView
+    <ImageView
+        android:id="@+id/item_card_stone_stat_back_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
         android:id="@+id/item_card_stone_stat_tv_stone_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
+        android:background="@android:color/transparent"
         android:fontFamily="@font/yangjin"
         android:textColor="@color/c_262525"
         android:textSize="20sp"
+        android:maxLines="1"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -155,5 +169,11 @@
         app:trackThickness="8dp"
         tools:progress="80" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/stone_char_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="item_card_stone_stat_tv_stone_name, item_card_stone_stat_btn_modify_name, item_card_stone_stat_iv_stone_character, item_card_stone_stat_btn_attack_explain, item_card_stone_stat_progress_attack_stat, item_card_stone_stat_tv_attack, item_card_stone_stat_btn_defence_explain, item_card_stone_stat_progress_defence_stat, item_card_stone_stat_tv_defence, item_card_stone_stat_btn_magic_explain, item_card_stone_stat_progress_magic_stat, item_card_stone_stat_tv_magic"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.goormthon.mang9rme.common.data.StoneData
+import com.goormthon.mang9rme.jihun.data.data.StoneNameModifyRequest
 import com.goormthon.mang9rme.jihun.data.repo.StoneRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,16 +22,20 @@ class DetailViewModel @Inject constructor(private val stoneRepository: StoneRepo
     val userToastMsg: LiveData<String> = _userToastMsg
 
     fun getStoneData(stoneId : Int) {
-        Log.d("----", "getStoneData: $stoneId")
         viewModelScope.launch {
             stoneRepository.getStoneData(stoneId)
                 .onSuccess {
-                    Log.d("----", "getStoneData: $it")
                     _stoneData.value = it }
                 .onFailure {
-                    Log.d("----", "getStoneData: FAIL")
                     _userToastMsg.value = it.message }
         }
-        Log.d("----", "getStoneData: ??")
+    }
+
+    fun patchStoneName(modifiedName : String) {
+        viewModelScope.launch {
+            stoneRepository.patchStoneName(StoneNameModifyRequest(stoneData.value!!.stoneId, modifiedName))
+                .onSuccess { _userToastMsg.value = "이름 변경에 성공했습니다!" }
+                .onFailure { _userToastMsg.value = it.message }
+        }
     }
 }

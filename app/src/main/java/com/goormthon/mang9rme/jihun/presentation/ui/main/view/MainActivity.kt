@@ -1,7 +1,9 @@
 package com.goormthon.mang9rme.jihun.presentation.ui.main.view
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.util.Base64
@@ -15,6 +17,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.ActivityMainBinding
@@ -22,8 +25,10 @@ import com.goormthon.mang9rme.databinding.ItemPopupFilterBinding
 import com.goormthon.mang9rme.jihun.presentation.ui.detail.view.DetailActivity
 import com.goormthon.mang9rme.jihun.presentation.ui.main.adapter.StoneFeedAdapter
 import com.goormthon.mang9rme.jihun.presentation.ui.main.viewmodel.MainViewModel
+import com.goormthon.mang9rme.kimbsu.common.util.ConvertUtil
 import com.goormthon.mang9rme.kimbsu.feature.enroll.view.EnrollActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -59,6 +64,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun initView() {
         binding.mainRvContents.adapter =
             StoneFeedAdapter(::openDetailActivity).also { adapter = it }
+        binding.mainRvContents.addItemDecoration(MainRvDecorUtil(this))
     }
 
     override fun onStart() {
@@ -76,8 +82,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         {
             if (it.resultCode == RESULT_OK) {
-                Snackbar.make(binding.root, "수집한 돌이 등록되었어요", Snackbar.LENGTH_SHORT).apply {
-                    anchorView = binding.mainTvFilter
+                Snackbar.make(binding.mainTvFilter, "수집한 돌이 등록되었어요", Snackbar.LENGTH_SHORT).apply {
+                    setAnchorView(binding.mainRvContents)
+                    animationMode = Snackbar.ANIMATION_MODE_FADE
                     show()
                 }
                 viewModel.getStoneFeedData()
@@ -101,6 +108,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    fun multipartTest() {
+        val file = File("")
+    }
+
     fun openFilter() {
         popupWindow = PopupWindow(
             popup.root,
@@ -118,23 +129,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.item_popup_filter_sort_with_time -> {
-                Snackbar.make(binding.mainTvFilter, "수집한 돌이 등록되었어요", Snackbar.LENGTH_SHORT).apply {
-                    setAnchorView(binding.mainTvFilter)
-                    show()
-                }
-
                 popup.itemPopupFilterSortWithTime.typeface =
-                    ResourcesCompat.getFont(this, com.goormthon.mang9rme.R.font.pretendard_semibold)
+                    ResourcesCompat.getFont(this, R.font.pretendard_semibold)
                 popup.itemPopupFilterSortWithLevel.typeface =
-                    ResourcesCompat.getFont(this, com.goormthon.mang9rme.R.font.pretendard_regular)
+                    ResourcesCompat.getFont(this, R.font.pretendard_regular)
                 binding.mainTvFilter.text = "최신순"
             }
 
             R.id.item_popup_filter_sort_with_level -> {
                 popup.itemPopupFilterSortWithTime.typeface =
-                    ResourcesCompat.getFont(this, com.goormthon.mang9rme.R.font.pretendard_regular)
+                    ResourcesCompat.getFont(this, R.font.pretendard_regular)
                 popup.itemPopupFilterSortWithLevel.typeface =
-                    ResourcesCompat.getFont(this, com.goormthon.mang9rme.R.font.pretendard_semibold)
+                    ResourcesCompat.getFont(this, R.font.pretendard_semibold)
                 binding.mainTvFilter.text = "레벨순"
             }
         }
@@ -148,6 +154,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (res) {
             R.id.item_popup_filter_sort_with_level -> adapter.submitList(adapter.currentList.sortedBy { it.level })
             else -> adapter.submitList(adapter.currentList.sortedByDescending { it.dateTime })
+        }
+    }
+
+    inner class MainRvDecorUtil(private val context : Context) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+            outRect.bottom = ConvertUtil.dpToPx(context, 18)
         }
     }
 }

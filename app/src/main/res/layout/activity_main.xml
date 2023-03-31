@@ -22,7 +22,15 @@
             android:background="@color/c_ffffff"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- 툴바 아이템 여기 들어감-->
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="80dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_app_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> activity.multipartTest()}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
