@@ -29,7 +29,8 @@
                 android:src="@drawable/ic_app_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> activity.multipartTest()}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

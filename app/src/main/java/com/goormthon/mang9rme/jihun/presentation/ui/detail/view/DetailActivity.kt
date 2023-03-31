@@ -3,6 +3,7 @@ package com.goormthon.mang9rme.jihun.presentation.ui.detail.view
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -18,6 +19,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils.centerCrop
 import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.common.data.StoneData
 import com.goormthon.mang9rme.databinding.ActivityDetailBinding
@@ -35,6 +40,7 @@ class DetailActivity : AppCompatActivity() {
     private val viewModel: DetailViewModel by viewModels()
 
     private var isLoading = false
+    private var isChar = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +75,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun rotateMore(view: View) {
+        if(isChar) {
+            binding.cardStoneStat.stoneCharGroup.visibility = View.INVISIBLE
+            binding.cardStoneStat.itemCardStoneStatBackImage.visibility = View.VISIBLE
+        } else {
+            binding.cardStoneStat.stoneCharGroup.visibility = View.VISIBLE
+            binding.cardStoneStat.itemCardStoneStatBackImage.visibility = View.INVISIBLE
+        }
+        isChar = !isChar
         android.animation.ObjectAnimator.ofFloat(view, "scaleX", 0f, 1f)
             .setDuration(500).start()
     }
@@ -86,12 +100,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initIncludeView(data: StoneData) {
+
         binding.cardStoneStat.apply {
             itemCardStoneStatTvStoneName.setText(data.stoneName)
 
             itemCardStoneStatProgressAttackStat.progress = data.attack
             itemCardStoneStatProgressDefenceStat.progress = data.defense
             itemCardStoneStatProgressMagicStat.progress = data.magicDefense
+
 
             itemCardStoneStatBtnAttackExplain.setOnClickListener { openAttackPopup() }
             itemCardStoneStatBtnDefenceExplain.setOnClickListener { openDefensePopup() }
@@ -105,7 +121,6 @@ class DetailActivity : AppCompatActivity() {
                 false
             }
 
-
             itemCardStoneStatIvStoneCharacter.setImageResource(
                 setImageIcons(
                     data.stoneType,
@@ -113,6 +128,7 @@ class DetailActivity : AppCompatActivity() {
                 )
             )
         }
+        Glide.with(this).load(data.imageUrl).transform(CenterCrop(), RoundedCorners(30)).into(binding.cardStoneStat.itemCardStoneStatBackImage)
     }
 
     private fun setImageIcons(stoneType: String, totStat: Int): Int {

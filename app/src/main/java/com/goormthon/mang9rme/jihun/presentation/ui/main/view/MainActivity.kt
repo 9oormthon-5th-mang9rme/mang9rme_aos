@@ -28,6 +28,7 @@ import com.goormthon.mang9rme.jihun.presentation.ui.main.viewmodel.MainViewModel
 import com.goormthon.mang9rme.kimbsu.common.util.ConvertUtil
 import com.goormthon.mang9rme.kimbsu.feature.enroll.view.EnrollActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -105,6 +106,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         intent.putExtra("targetStone", stoneId)
         startActivity(intent)
 
+    }
+
+    fun multipartTest() {
+        val file = File("")
     }
 
     fun openFilter() {
