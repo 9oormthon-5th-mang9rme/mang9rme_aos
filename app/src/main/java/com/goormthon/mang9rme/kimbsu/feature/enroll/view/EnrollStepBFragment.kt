@@ -9,8 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.shape.CornerFamily
 import com.goormthon.mang9rme.R
 import com.goormthon.mang9rme.databinding.FragmentEnrollStepBBinding
+import com.goormthon.mang9rme.kimbsu.common.util.ConvertUtil
 import com.goormthon.mang9rme.kimbsu.feature.enroll.viewmodel.EnrollViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -57,6 +59,12 @@ class EnrollStepBFragment : Fragment(), View.OnClickListener {
         binding.apply {
             ivEnrollBack.setOnClickListener(this@EnrollStepBFragment)
             tvEnrollNextStep.setOnClickListener(this@EnrollStepBFragment)
+
+            ivEnrollAddPhoto.shapeAppearanceModel.let {
+                ivEnrollAddPhoto.shapeAppearanceModel = it.toBuilder()
+                    .setAllCorners(CornerFamily.ROUNDED, ConvertUtil.dpToPx(requireContext(), 14f))
+                    .build()
+            }
 
             model.uploadImageData.value?.let { uploadImageData ->
                 tvEnrollTitle.text = uploadImageData.imgCreateDate

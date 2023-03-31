@@ -8,9 +8,11 @@ import com.goormthon.mang9rme.kimbsu.feature.base.repository.BaseNetworkReposito
 import com.goormthon.mang9rme.kimbsu.feature.enroll.data.UploadImageData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import java.io.File
 import java.net.URLEncoder
@@ -62,19 +64,19 @@ class EnrollNetworkRepository(
                 put("stoneType", pUploadImageData.stoneType ?: "")
             }
             val file = File(pUploadImageData.filePath)
-            DLog.d(TAG, "fileName=${file.name}, filePath=${pUploadImageData.filePath}, absPath=${file.absolutePath}")
             val requestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-//                .addFormDataPart(
-//                    "image",
-//                    file.name,
-//                    file.asRequestBody("image/*".toMediaTypeOrNull())
-//                )
+                .addFormDataPart(
+                    "image",
+                    file.name,
+                    file.asRequestBody("image/*".toMediaTypeOrNull())
+                )
                 .addFormDataPart("uploadStoneRequest", obj.toString())
                 .build()
 
             val request = Request.Builder()
                 .url("${BASE_URL}/api/stone")
+                .addHeader("Content-Type","application/json")
                 .post(requestBody)
                 .build()
 
